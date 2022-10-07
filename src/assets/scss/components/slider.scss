@@ -1,0 +1,195 @@
+.slider {
+  margin-top: -150px;
+  .carousel-indicators {
+    display: none;
+  }
+  .carousel-control-next {
+    display: none;
+  }
+  .carousel-control-prev {
+    display: none;
+  }
+  .hn {
+    position: absolute;
+    top: 100px;
+    width: 55%;
+    margin-left: 50px;
+    font-size: $c3-text-s;
+    font-weight: $c3-text-w;
+    color: $c1-text-cl;
+    i.text {
+      font-size: $c4-text-s;
+      font-style: italic;
+    }
+    Form {
+      display: flex;
+      .mr-lg-0 {
+        padding-left: 40px;
+        width: 75%;
+        height: 50px;
+        border-radius: 4px 0 0 4px;
+      }
+      .btnn {
+        background-color: #19a463;
+        color: $c1-text-cl;
+        height: 50px;
+        font-size: $c1-text-s;
+        font-weight: $c3-text-w;
+        padding: 0 16px;
+        border-radius: 0 4px 4px 0;
+        border: none;
+      }
+      i {
+        position: absolute;
+        margin-top: 17px;
+        width: 22px;
+        margin-left: 15px;
+        font-size: $c1-text-s;
+        color: $c4-text-cl;
+      }
+    }
+    .popular {
+      font-size: $c1-text-s;
+      margin-top: 10px;
+    }
+    .Chip {
+      color: $c2-bg-cl;
+      border-color: $c2-bg-cl;
+      cursor: pointer;
+      font-size: $c1-text-s;
+      margin-left: 10px;
+    }
+    @media screen and (max-width: 1131px) {
+      font-size: $c5-text-s;
+      i {
+        font-size: $c5-text-s;
+      }
+    }
+    @media screen and (max-width: 930px) {
+      width: 85%;
+      margin-left: 100px;
+      font-size: $c5-text-s;
+      margin-top: 10px;
+      .popular {
+        display: none;
+      }
+      i.text {
+        font-size: $c5-text-s;
+      }
+      Form {
+        display: block;
+        .searchLogo {
+          margin-top: 13px;
+        }
+        .mr-lg-0 {
+          width: 90%;
+          height: 40px;
+          border-radius: 4px;
+        }
+        .btnn {
+          //   margin-top: 5px;
+          height: 40px;
+          width: 90%;
+          font-size: $c2-text-s;
+          border-radius: 4px;
+        }
+      }
+    }
+    @media screen and (max-width: 700px) {
+      width: 80%;
+      margin-left: 80px;
+      font-size: $c6-text-s;
+      i.text {
+        font-size: $c6-text-s;
+      }
+      Form {
+        .mr-lg-0 {
+          width: 95%;
+          height: 45px;
+        }
+        .btnn {
+          width: 95%;
+          height: 45px;
+        }
+      }
+    }
+    @media screen and (max-width: 580px) {
+      width: 85%;
+      margin-left: 45px;
+      font-size: $c6-text-s;
+    }
+    @media screen and (max-width: 510px) {
+      width: 85%;
+      margin-left: 45px;
+      font-size: $c2-text-s;
+    }
+    @media screen and (max-width: 450px) {
+      width: 70%;
+      margin-left: 55px;
+      font-size: $c1-text-s;
+      height: 30px;
+      top: 80px;
+      i.text {
+        font-size: $c1-text-s;
+      }
+      Form {
+        .mr-lg-0 {
+          width: 90%;
+          height: 30px;
+          padding-left: 25px;
+          font-size: $c1-text-s;
+        }
+        i.searchLogo {
+          margin-top: 9px;
+          margin-left: 7px;
+        }
+        .btnn {
+          width: 90%;
+          height: 30px;
+          margin-top: 5px;
+          font-size: $c1-text-s;
+        }
+      }
+    }
+  }
+  .trustBy {
+    display: grid;
+    background-color: #f9f9f9;
+    .container {
+      margin: 0 auto;
+      padding: 80px 0 40px 0;
+      span {
+        font-weight: $c3-text-w;
+        color: $c4-text-cl;
+        margin-right: 20px;
+        justify-content: center;
+      }
+      ul {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        justify-content: space-around;
+        li {
+        }
+      }
+    }
+    @media screen and (max-width:1180px) {
+      span{
+        display: none;
+      }
+      .container{
+        padding: 40px 0 20px 0;
+      }
+    }
+    @media screen and (max-width:600px) {
+     li.paypal{
+      display: none;
+     }
+    }
+    @media screen and (max-width:450px) {
+      li.png{
+       display: none;
+      }
+     }
+  }
+}

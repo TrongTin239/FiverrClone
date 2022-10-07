@@ -1,0 +1,13 @@
+//base
+@import "./base/base";
+
+//variable
+@import "./themes/variable";
+
+
+// Pages
+@import "./pages/header.scss";
+
+
+@import "./components/slider.scss";
+@import "./components/footer.scss"

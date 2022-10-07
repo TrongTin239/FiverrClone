@@ -1,0 +1,33 @@
+.footer {
+  margin-top: 50px;
+  .container {
+    .row-footer {
+      display: flex;
+      gap: 30px;
+      ul {
+      
+        width: 20%;
+        h5 {
+        margin-bottom: 10px;
+
+        }
+        li {
+            padding-top: 10px;
+          margin-top: 10px;
+          &:hover {
+            a {
+            text-decoration: dashed;
+
+            }
+          }
+          a {
+
+            p {
+                opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
