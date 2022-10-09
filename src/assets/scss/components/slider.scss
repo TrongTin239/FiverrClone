@@ -47,10 +47,16 @@
         font-size: $c1-text-s;
         color: $c4-text-cl;
       }
+      .form-control {
+        &:focus {
+          outline: none !important;
+          border-color: none !important;
+        }
+      }
     }
     .popular {
       font-size: $c1-text-s;
-      margin-top: 10px;
+      margin-top: 20px;
     }
     .Chip {
       color: $c2-bg-cl;
@@ -173,23 +179,23 @@
         }
       }
     }
-    @media screen and (max-width:1180px) {
-      span{
+    @media screen and (max-width: 1180px) {
+      span {
         display: none;
       }
-      .container{
+      .container {
         padding: 40px 0 20px 0;
       }
     }
-    @media screen and (max-width:600px) {
-     li.paypal{
-      display: none;
-     }
-    }
-    @media screen and (max-width:450px) {
-      li.png{
-       display: none;
+    @media screen and (max-width: 600px) {
+      li.paypal {
+        display: none;
       }
-     }
+    }
+    @media screen and (max-width: 450px) {
+      li.png {
+        display: none;
+      }
+    }
   }
 }

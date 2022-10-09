@@ -1,0 +1,255 @@
+.header-main {
+  // overflow-x: scroll;
+  // overflow-y: hidden;
+  position: relative;
+  // width: 1vh;
+  .nn {
+    position: block;
+    top: 0;
+    // position: -webkit-sticky;
+    width: 100%;
+    background-color: $c2-bg-cl;
+    z-index: 9999;
+    .containerh {
+      width: 100%;
+
+      .col1 {
+        display: flex;
+
+        .disactive {
+          display: none;
+        }
+        .nm {
+          display: flex;
+          // align-items: center;
+          .logo {
+            display: flex;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: -10px;
+            img {
+              height: 28px;
+            }
+            .dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 50px;
+              background-color: $c1-bg-cl;
+              margin-top: 20px;
+            }
+          }
+          .searchBar {
+            margin-top: 4px;
+            padding-left: 25px;
+            display: flex;
+            padding-top: 20px;
+            .input {
+              border-radius: 4px 0 0 4px;
+              width: 400px;
+              height: 35px;
+              &:focus {
+                outline: none;
+                // border: none;
+              }
+            }
+            .searchLogo {
+              // position: absolute;
+              border-radius: 0 4px 4px 0;
+              height: 35px;
+            }
+          }
+          .searchHiden {
+            display: none;
+          }
+        }
+      }
+      #barIcon {
+        visibility: hidden;
+        margin-top: 22px;
+        margin-left: 20px;
+        height: 25px;
+        cursor: pointer;
+      }
+      .nvegation {
+        margin-top: 26px;
+      }
+      ul {
+        display: flex;
+        margin-top: 13px;
+        li {
+          padding-left: 15px;
+          margin-left: 10px;
+          // align-items: center;
+
+          a {
+            font-size: $c1-text-s;
+            font-weight: $c3-text-w;
+
+            #searchIcon {
+              font-size: 20px;
+            }
+          }
+          .linkColor {
+            color: $c2-text-cl;
+          }
+          .disactiveColor {
+            color: $c1-text-cl;
+          }
+          .global {
+            padding: 10px;
+            #searchIcon {
+              // color: $c1-text-cl;
+            }
+          }
+          .signIn {
+            font-weight: $c4-text-w;
+            cursor: pointer;
+            &:hover {
+              color: $c3-text-cl;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1500px) {
+        ul {
+          li {
+            margin-left: 8px;
+            padding: 0;
+            a {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1100px) {
+        ul {
+          li {
+            margin-left: 8px;
+            padding: 0;
+            a {
+              // font-size: 10px ;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1298px) {
+        .searchBar {
+          display: none !important;
+        }
+        .col1 {
+          .nm {
+            .logo {
+              margin-top: 14px;
+            }
+          }
+        }
+        #barIcon {
+          visibility: visible;
+          margin-right: 20px;
+        }
+      }
+      @media screen and (max-width: 1100px) {
+        .li {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 930px) {
+        .sli {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 900px) {
+        ul {
+          justify-content: flex-end;
+        }
+        .tli {
+          display: none;
+        }
+      }
+    }
+  }
+  .active {
+    background-color: $c2-bg-cl;
+  }
+  .categoriesMenu {
+    border-top: 1px solid $c4-bg-cl;
+    border-bottom: 1px solid $c4-bg-cl;
+    
+    .container {
+      .categories {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        ul {
+          margin-bottom: 0;
+          li {
+            position: relative;
+            display: inline-block;
+            &:hover {
+              .detail-job {
+                visibility: visible;
+              }
+              .detail-job.music {
+                visibility: visible;
+              }
+            }
+            a {
+              cursor: pointer;
+            }
+            .detail-job {
+              visibility: hidden;
+              width: max-content;
+              background-color: $c2-bg-cl;
+              color: black;
+              text-align: center;
+              border-radius: 6px;
+              padding: 30px;
+              //   border: 1px solid;
+              /* Position the tooltip */
+              position: absolute;
+              // bottom:50%;
+              z-index: 1;
+              display: flex;
+              gap: 100px;
+              box-shadow: 1px 1px 1px 1px gray;
+              ul {
+                text-align: left;
+                padding: 0;
+                // display: none;
+                display: flex;
+                flex-direction: column;
+                h5 {
+                  width: 200px;
+                  margin: 15px 0;
+                  font-size: $c7-text-s;
+                }
+                li {
+                  padding: 10px 0;
+                }
+              }
+            }
+            .detail-job.music {
+              left: -430px;
+              visibility: hidden;
+              width: max-content;
+              background-color: $c2-bg-cl;
+              color: black;
+              text-align: center;
+              border-radius: 6px;
+              padding: 30px;
+              //   border: 1px solid;
+              /* Position the tooltip */
+              position: absolute;
+              // bottom:50%;
+              z-index: 1;
+              display: flex;
+              gap: 100px;
+              box-shadow: 1px 1px 1px 1px gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}

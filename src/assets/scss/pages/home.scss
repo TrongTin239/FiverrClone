@@ -1,0 +1,121 @@
+.slider-content {
+  padding: 0 80px 0 50px;
+  .main-slide {
+    padding: 10px 0 50px 0;
+    h2 {
+      margin-bottom: 30px;
+    }
+    .slider-card {
+      // height: 350px;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+  .slick-slide {
+  }
+  .slick-next {
+    right: 0px;
+  }
+  .slick-next::before,
+  .slick-prev::before {
+    color: black;
+    font-size: 30px;
+  }
+  .free-talent {
+    background-color: $c3-bg-cl;
+    .container {
+      padding: 60px 0;
+      .row {
+        .col-5 {
+          margin-right: 80px;
+          .talent-content {
+            .content {
+              .title {
+                display: flex;
+                align-items: center;
+                i {
+                  font-size: $c2-text-s;
+                  margin-right: 10px;
+                  color: $c4-text-cl;
+                }
+                h5 {
+                  margin: 0;
+                  line-height: 30px;
+                }
+              }
+              .text {
+                font-size: $c2-text-s;
+                color: $c4-text-cl;
+              }
+            }
+          }
+        }
+        .col-6 {
+          position: relative;
+          .video-content {
+            position: absolute;
+            width: 90%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            img {
+              width: 100%;
+            }
+
+            .play-btn {
+              width: 80px;
+              position: absolute;
+              top: 40%;
+              left: 40%;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  .explore {
+    .container {
+      padding: 80px 0;
+      h2 {
+      }
+      ul {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        flex-wrap: wrap;
+        li {
+          flex: 0 0 calc(20% - 30px);
+          margin-bottom: 40px;
+          a {
+            display: flex;
+            position: relative;
+            // text-align: center;
+            flex-direction: column;
+            align-items: center;
+            img {
+              width: 50px;
+              margin-bottom: 20px;
+              height: 60px;
+            }
+          }
+          ::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            bottom: 50px;
+            // top: 30%;
+            top: 0;
+            border-bottom: 2px solid $c4-text-cl;
+            transition: all  0.2s;
+          }
+          &:hover::after {
+           padding: 0 -20px 8px;
+          }
+        }
+      }
+    }
+  }
+}

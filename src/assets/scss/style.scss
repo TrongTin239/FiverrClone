@@ -4,10 +4,10 @@
 //variable
 @import "./themes/variable";
 
-
 // Pages
 @import "./pages/header.scss";
-
-
+@import "./pages/home.scss";
+@import "./components/homeMain.scss";
+@import "./pages/detail.scss";
 @import "./components/slider.scss";
-@import "./components/footer.scss"
+@import "./components/footer.scss";

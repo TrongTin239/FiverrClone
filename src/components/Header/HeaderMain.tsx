@@ -5,71 +5,107 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, FormControl, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  NavLink,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 // import { Form } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
 
 import {
+  getJobCateApi,
+  getJobList,
   getJobMenu,
   JobListDetail,
   JobModel,
   ListDetailCate,
 } from "../../redux/reducers/jobReducers";
+
+import { getStore, setStore } from "../../util/tool";
 import Slider from "../Slider/Slider";
 type Props = {};
 
 export default function Header({}: Props) {
   const { jobMenu } = useSelector((state: RootState) => state.jobReducers);
   const dispatch: AppDispatch = useDispatch();
-  const [navbar, setNavbar] = useState<boolean>();
+  const [navbar, setNavbar] = useState<boolean>(true);
+  const [searchParams, setSearchParams] = useSearchParams("keysearch");
+  const navigate = useNavigate();
 
-  // Navbar
+  let keysearch: string | null = getStore("keysearch");
+  // console.log(keysearch);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 10) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
+  const [key, setKey] = useState("keysearch");
+
+  const handleChange = (e: any) => {
+    setKey(e.target.value);
   };
-  window.addEventListener("scroll", changeBackground);
-  //   console.log(jobMenu);
+  const getKeySearch = () => {
+    const action = getJobList(keysearch);
+    dispatch(action);
+  };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setStore("keysearch", key);
+    getKeySearch();
+    navigate(`/detail/${key}`);
+    // window.location.reload();
+  };
+  const getJobCate = (id: number) => {
+    dispatch(getJobCateApi(id));
+  };
+  const renderCategories = () => {
+    return jobMenu?.map((job: JobModel, index: number) => {
+      // console.log(job)
+      return (
+        <ul key={job.id}>
+          <li>
+            <a
+              onClick={() => {
+                getJobCate(job.id)
+                navigate(`/categories/${job.id}`);
+              }}
+            >
+              {" "}
+              {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}{" "}
+            </a>
 
-  // const renderCategories = () => {
-  //   return jobMenu?.map((job: JobModel, index: number) => {
-  //     // console.log(job)
-  //     return (
-  //       <ul key={job.id}>
-  //         <li>
-  //           <a href="">
-  //             {" "}
-  //             {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}{" "}
-  //           </a>
+            <div
+              className={
+                job.tenLoaiCongViec === "Music & Audio"
+                  ? " detail-job music"
+                  : "detail-job"
+              }
+            >
+              {job.dsNhomChiTietLoai?.map((item: JobListDetail) => {
+                // console.log(item.dsChiTietLoai)
+                return (
+                  <ul className="moreDetailCate" key={item.id}>
+                    <h5> {item.tenNhom} </h5>
+                    {item.dsChiTietLoai.map((i: ListDetailCate) => {
+                      return <li key={i.id}>{i.tenChiTiet}</li>;
+                    })}
+                  </ul>
+                );
+              })}
+            </div>
+          </li>
+        </ul>
+      );
+    });
+  };
 
-  //           {job.dsNhomChiTietLoai?.map((item: JobListDetail) => {
-  //             // console.log(item.dsChiTietLoai)
-  //             return (
-  //               <ul className="moreDetailCate" key={item.id}>
-  //                 <h5> {item.tenNhom} </h5>
-  //                 {item.dsChiTietLoai.map((i: ListDetailCate) => {
-  //                   return <li key={i.id}>{i.tenChiTiet}</li>;
-  //                 })}
-  //               </ul>
-  //             );
-  //           })}
-  //         </li>
-  //       </ul>
-  //     );
-  //   });
-  // };
+  useEffect(() => {
+    const action = getJobMenu();
+    dispatch(action);
+    getKeySearch();
+  }, [keysearch]);
 
-  // useEffect(() => {
-  //   const action = getJobMenu();
-  //   dispatch(action);
-  // }, []);
-
+  useEffect(() => {}, []);
   return (
-  
-    <div className="header">
+    <div className="header-main">
       <div className={navbar ? "nn active" : "nn"}>
         <Row className="containerh  ">
           <Col className="col1">
@@ -80,24 +116,23 @@ export default function Header({}: Props) {
               id="barIcon"
             />
             <div className="nm">
-              <div className={navbar ? "disactive" : "logo"}>
-                <img src="img/logo.png" style={{ width: "100px" }} alt="..." />
-                <div className="dot"></div>
-                <div></div>
-              </div>
               <div className={navbar ? "logo" : "disactive"}>
                 <img
-                  src="img/black-logo.png"
+                  src={require("../../assets/img/black-logo.png")}
                   alt=""
                   style={{ width: "100px", height: "40px" }}
+                  onClick={() =>{
+                    navigate("/")
+                  }}
                 />
               </div>
               <div className={navbar ? "searchBar" : "searchBar searchHiden"}>
-                <Form className="d-flex">
+                <Form className="d-flex" onSubmit={handleSubmit}>
                   <FormControl
                     type="text"
                     placeholder="Search..."
                     className="mr-lg-8 input"
+                    onChange={handleChange}
                   />
                   <button className="btn btn-dark searchLogo">
                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -163,9 +198,10 @@ export default function Header({}: Props) {
           </Col>
         </Row>
       </div>
-
-      <div>
-        <Slider />
+      <div className="categoriesMenu">
+        <div className="container">
+          <div className="categories">{renderCategories()}</div>
+        </div>
       </div>
     </div>
   );

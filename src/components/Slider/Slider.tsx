@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Form, FormControl } from "react-bootstrap";
 import Chip from "@mui/material/Chip";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getJobList } from "../../redux/reducers/jobReducers";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { AppDispatch } from "../../redux/configStore";
+import { setStore } from "../../util/tool";
 
 type Props = {};
 
 export default function Slider({}: Props) {
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [key, setKey] = useState("");
+
+  const handleChange = (e: any) => {
+    setKey(e.target.value);
+    console.log(key)
+  };
+  const getKeySearch = () => {
+    const action = getJobList(key);
+    dispatch(action);
+  };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    setStore("keysearch", key);
+    getKeySearch();
+    navigate(`/detail/${key}`);
+  };
+
+  
   return (
     <div className="slider">
       <Carousel>
@@ -39,12 +68,14 @@ export default function Slider({}: Props) {
           Find the perfect freelance{" "}
           <i className="text">Services for your Business</i>
         </p>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <i className="fa-solid fa-magnifying-glass searchLogo"></i>
           <FormControl
             type="text"
             placeholder='Try "building mobile app"'
             className="mr-lg-0"
+            style={{ borderColor: "none" }}
+            onChange={handleChange}
           />
           <button className="btnn">Search</button>
         </Form>
@@ -90,10 +121,9 @@ export default function Slider({}: Props) {
       </div>
       <div className="trustBy">
         <div className="container">
-        <span>Trusted by:</span>
+          <span>Trusted by:</span>
 
           <ul>
-           
             <li className="fb">
               <img src="img/facebook.31d5f92.png" alt="facebook" />
             </li>
