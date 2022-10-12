@@ -1,7 +1,12 @@
+import React, { JSXElementConstructor, ReactElement } from "react";
+
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { http } from "../../util/tool";
+
 // import { http } from "";
+
 import {
   ACCESS_TOKEN,
   getStore,
@@ -12,7 +17,13 @@ import {
   USER_LOGIN,
 } from "../../util/tool";
 import { AppDispatch } from "../configStore";
+import DetailJob from "../../templates/CategoreisHOC/DetailJob";
+import Detail from "../../pages/Detail/Detail";
+import JobFromDetail from "../../templates/HomeTemplate/JobFromDetail";
 
+const customizedMiddleware = getDefaultMiddleware({
+  serializableCheck: false,
+});
 export interface JobModel {
   id: number;
   tenLoaiCongViec: string;
@@ -57,6 +68,8 @@ const initialState: any = {
   jobMenu: [],
   jobList: [],
   jobCate: [],
+  Component: <DetailJob/>,
+  jobFromDetail: [],
 };
 
 const jobReducers = createSlice({
@@ -72,13 +85,30 @@ const jobReducers = createSlice({
     },
     getJobCateAction: (state, action: PayloadAction<JobListModel[]>) => {
       state.jobCate = action.payload;
-      setStoreJson("jobCate", state.jobCate)
+      setStoreJson("jobCate", state.jobCate);
+    },
+    getJobFromDetailAction: (state, action: PayloadAction<JobListModel[]>) => {
+      state.jobFromDetail = action.payload;
+      setStoreJson("jobFromDetail", state.jobFromDetail);
+    },
+
+    changeComponentFromDetail: (state, action: PayloadAction) => {
+      state.Component = <JobFromDetail />;
+    },
+    changeComponent: (state, action: PayloadAction) => {
+      state.Component = <DetailJob />;
     },
   },
 });
 
-export const { getJobMenuAction, getJobListaction, getJobCateAction } =
-  jobReducers.actions;
+export const {
+  getJobMenuAction,
+  getJobListaction,
+  getJobCateAction,
+  getJobFromDetailAction,
+  changeComponentFromDetail,
+  changeComponent,
+} = jobReducers.actions;
 
 export default jobReducers.reducer;
 
@@ -128,5 +158,25 @@ export const getJobCateApi = (id: number) => {
       dispatch(action);
       // console.log(action)
     } catch (err) {}
+  };
+};
+
+export const getJobFromDetailApi = (id: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await axios({
+        url: `https://fiverrnew.cybersoft.edu.vn/api/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${id}`,
+        method: "get",
+        headers: {
+          tokenCybersoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU",
+        },
+      });
+      const action = getJobFromDetailAction(result.data.content);
+      dispatch(action);
+      // console.log(action);
+    } catch (err) {
+      console.log(err);
+    }
   };
 };

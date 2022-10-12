@@ -1,6 +1,7 @@
 .detail {
   .container {
     h2 {
+      margin-top: 30px;
     }
     .header-detail {
       // height: 150px;
@@ -9,7 +10,7 @@
       justify-content: space-between;
       .details-select {
         display: flex;
-        gap: 50px;
+        gap: 10px;
         details {
           summary {
             border: 1px solid $c6-text-cl;
@@ -62,12 +63,27 @@
           }
         }
       }
+      @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        // justify-content: space-between;
+        gap: 30px;
+      }
     }
     .detail-main {
       margin:80px 0;
       .row {
         .col-3 {
           margin-top: 30px;
+          @media screen and (max-width: 769px) {
+            width: 30%;
+          }
+          @media screen and (max-width: 587px) {
+            width: 50%;
+          }
+
+          @media screen and (max-width: 376px) {
+            width: 100%;
+          }
           .card {
             img {
               width: 100%;
@@ -97,7 +113,7 @@
                 margin-top: 5px;
                 p {
                   transition: 0.1s;
-                height: 50px;
+                height: 80px;
 
                 }
                 .star {

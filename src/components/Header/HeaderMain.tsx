@@ -15,7 +15,10 @@ import {
 import { AppDispatch, RootState } from "../../redux/configStore";
 
 import {
+  changeComponent,
+  changeComponentFromDetail,
   getJobCateApi,
+  getJobFromDetailApi,
   getJobList,
   getJobMenu,
   JobListDetail,
@@ -46,6 +49,7 @@ export default function Header({}: Props) {
     const action = getJobList(keysearch);
     dispatch(action);
   };
+ 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setStore("keysearch", key);
@@ -61,10 +65,11 @@ export default function Header({}: Props) {
       // console.log(job)
       return (
         <ul key={job.id}>
-          <li>
+          <li className="header-job">
             <a
               onClick={() => {
                 getJobCate(job.id)
+                dispatch(changeComponent())
                 navigate(`/categories/${job.id}`);
               }}
             >
@@ -85,7 +90,10 @@ export default function Header({}: Props) {
                   <ul className="moreDetailCate" key={item.id}>
                     <h5> {item.tenNhom} </h5>
                     {item.dsChiTietLoai.map((i: ListDetailCate) => {
-                      return <li key={i.id}>{i.tenChiTiet}</li>;
+                      return <li key={i.id}
+                    
+                      
+                      >{i.tenChiTiet}</li>;
                     })}
                   </ul>
                 );

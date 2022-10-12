@@ -10,6 +10,9 @@
 
       img {
         cursor: pointer;
+        @media screen and (max-width: 586px) {
+          width: 100%;
+        }
       }
     }
   }
@@ -17,6 +20,12 @@
   }
   .slick-next {
     right: 0px;
+    @media screen and (max-width: 768px) {
+      right: 50px;
+    }
+    @media screen and (max-width: 586px) {
+      right: -10px;
+    }
   }
   .slick-next::before,
   .slick-prev::before {
@@ -28,8 +37,15 @@
     .container {
       padding: 60px 0;
       .row {
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          margin-bottom: 20px;
+        }
         .col-5 {
           margin-right: 80px;
+          @media screen and (max-width: 768px) {
+            width: 100%;
+          }
           .talent-content {
             .content {
               .title {
@@ -49,10 +65,23 @@
                 font-size: $c2-text-s;
                 color: $c4-text-cl;
               }
+              @media screen and (max-width: 375px) {
+                .title {
+                  h5 {
+                    font-size: $c1-text-s;
+                  }
+                }
+                .text {
+                  font-size: $c7-text-s;
+                }
+              }
             }
           }
         }
         .col-6 {
+          @media screen and (max-width: 768px) {
+            width: 100%;
+          }
           position: relative;
           .video-content {
             position: absolute;
@@ -70,7 +99,21 @@
               top: 40%;
               left: 40%;
               cursor: pointer;
+              @media screen and (max-width:375px) {
+                width: 50px;
+              }
             }
+            @media screen and (max-width: 768px) {
+              position: relative;
+              transform: translate(0%, 0%);
+              top: 0%;
+              left: 0%;
+              width: 100%;
+            }
+          }
+          @media screen and (max-width: 768px) {
+            margin-top: 20px;
+           
           }
         }
       }
@@ -98,7 +141,8 @@
             img {
               width: 50px;
               margin-bottom: 20px;
-              height: 60px;
+              height: 80px;
+
             }
           }
           ::after {
@@ -109,10 +153,18 @@
             // top: 30%;
             top: 0;
             border-bottom: 2px solid $c4-text-cl;
-            transition: all  0.2s;
+            transition: all 0.2s;
           }
           &:hover::after {
-           padding: 0 -20px 8px;
+            padding: 0 -20px 8px;
+          }
+          @media screen and (max-width:769px) {
+            flex: 0 0 calc(30% - 30px);
+              
+            }
+          @media screen and (max-width:587px) {
+          flex: 0 0 calc(50% - 30px);
+            
           }
         }
       }

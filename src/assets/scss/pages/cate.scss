@@ -1,0 +1,192 @@
+.container {
+  .JobDetail{
+    
+  .banner {
+ 
+    img{
+      width: 100%;
+    }
+    margin-top: 50px;
+
+    background-image: url("../../img/bg-cate.webp");
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size:cover;
+   
+    .banner-text {
+      position: relative;
+      .title {
+        text-align: center;
+        color: $c1-text-cl;
+        width: 400px;
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, 50%);
+        p {
+          font-size: $c2-text-s;
+          letter-spacing: 0.5px;
+        }
+        .btn-work {
+          color: $c1-text-cl;
+
+          padding: 8px 15px;
+          border: 1px solid $c2-bg-cl;
+          border-radius: 4px;
+          background-color: transparent;
+          transition: 0.2s;
+          i {
+            margin-right: 10px;
+          }
+          span {
+          }
+          &:hover {
+            color: black;
+
+            background-color: $c1-text-cl;
+          }
+        }
+      }
+    }
+  }
+  .popular {
+    position: relative;
+    margin-top: 20px;
+    h4 {
+      margin-bottom: 30px;
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+        gap: 20px;
+      li {
+        cursor: pointer;
+        padding: 8px 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $c2-bg-cl;
+        box-shadow: 0 0.14px 2.29266px rgb(0 0 0 / 3%),
+          0 0.37px 4.42626px rgb(0 0 0 / 5%), 0 3px 7px rgb(0 0 0 / 9%);
+        border-radius: 4px;
+        .img {
+          margin-right: 10px;
+          img {
+            width: 40px;
+          }
+        }
+
+        .text {
+          span {
+            margin-right: 4px;
+            transition: 0.3s;
+            font-weight: $c3-text-w;
+          }
+          i {
+            color: $c4-text-cl;
+          }
+        }
+        &:hover {
+          .text {
+            span {
+              color: $c3-text-cl;
+            }
+          }
+        }
+      }
+    }
+  }
+  .job-categories {
+    margin-top: 50px;
+    h2 {
+      font-size: $c9-text-s;
+      font-weight: $c4-text-w;
+      margin-bottom: 30px;
+    }
+    .row {
+      .col-3 {
+        @media screen and ( max-width:769px) {
+          width: 40%;
+        }
+        @media screen and ( max-width:376px) {
+          width: 100%;
+        }
+        .img {
+          img {
+            width: 100%;
+          }
+        }
+        .more-details {
+          .group-name {
+            margin: 10px 0;
+            h3 {
+              font-size: $c2-text-s;
+              font-weight: $c3-text-w;
+              padding-left: 10px;
+            }
+          }
+          .details-job {
+            ul {
+              padding: 0;
+              li {
+                cursor: pointer;
+
+                padding: 8px 15px;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: 0.3s;
+                a {
+                  font-size: $c7-text-s;
+                  color: $c4-text-cl;
+                  width: 200px;
+                }
+                i {
+                  color: $c6-text-cl;
+                  display: none;
+                }
+                &:hover {
+                  background-color: $c5-bg-cl;
+                  border-radius: 7px;
+                  i {
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  }
+
+
+
+  .test-area{
+    display: none;
+  }
+  .test-area.d-active{
+    display: block;
+  }
+  .services {
+    margin-top: 50px;
+    text-align: center;
+    h3 {
+      margin-bottom: 30px;
+    }
+    ul {
+      span {
+        margin: 5px;
+        display: inline-block;
+        background-color: $c6-bg-cl;
+        padding: 5px 8px;
+        border-radius: 20px;
+        a {
+        }
+      }
+    }
+  }
+}
