@@ -32,40 +32,7 @@ export default function Header({}: Props) {
     }
   };
   window.addEventListener("scroll", changeBackground);
-  //   console.log(jobMenu);
 
-  // const renderCategories = () => {
-  //   return jobMenu?.map((job: JobModel, index: number) => {
-  //     // console.log(job)
-  //     return (
-  //       <ul key={job.id}>
-  //         <li>
-  //           <a href="">
-  //             {" "}
-  //             {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}{" "}
-  //           </a>
-
-  //           {job.dsNhomChiTietLoai?.map((item: JobListDetail) => {
-  //             // console.log(item.dsChiTietLoai)
-  //             return (
-  //               <ul className="moreDetailCate" key={item.id}>
-  //                 <h5> {item.tenNhom} </h5>
-  //                 {item.dsChiTietLoai.map((i: ListDetailCate) => {
-  //                   return <li key={i.id}>{i.tenChiTiet}</li>;
-  //                 })}
-  //               </ul>
-  //             );
-  //           })}
-  //         </li>
-  //       </ul>
-  //     );
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   const action = getJobMenu();
-  //   dispatch(action);
-  // }, []);
 
   return (
   

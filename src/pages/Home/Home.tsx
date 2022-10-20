@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import VideoModal from "../../components/VideoComponent/Video";
 
 export default class Home extends Component {
   render() {
@@ -134,11 +135,8 @@ export default class Home extends Component {
               </div>
               <div className="col-6">
                 <div className="video-content">
-                  <img src="img/bg-video.webp" alt="" />
-
-                  <div className="play-btn">
-                    <img src="img/play.png" alt="" />
-                  </div>
+                  {/* <img src="img/bg-video.webp" alt="" /> */}
+                  <VideoModal />
                 </div>
               </div>
             </div>
@@ -163,7 +161,7 @@ export default class Home extends Component {
               <li>
                 <a href="">
                   <img src="img/writing.svg" alt="graphic" />
-                  Writing  & Translation
+                  Writing & Translation
                 </a>
               </li>
               <li>

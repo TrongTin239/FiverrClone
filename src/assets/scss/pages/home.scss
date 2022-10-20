@@ -79,6 +79,24 @@
           }
         }
         .col-6 {
+          .modal-btn::after {
+            content: "";
+            display: inline-block;
+            background: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/desktop-play-button.c1196d6.png)
+              no-repeat;
+            background-size: 80px;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            z-index: 1;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            @media screen and ( max-width:376px) {
+              background-size: 50px;
+              width: 50px;
+            }
+          }
           @media screen and (max-width: 768px) {
             width: 100%;
           }

@@ -29,9 +29,13 @@ export default function Slider({}: Props) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
+   if(key) {
     setStore("keysearch", key);
     getKeySearch();
     navigate(`/detail/${key}`);
+   }if (!key) {
+    return
+   }
   };
 
   

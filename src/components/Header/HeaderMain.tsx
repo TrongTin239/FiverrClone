@@ -52,9 +52,13 @@ export default function Header({}: Props) {
  
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setStore("keysearch", key);
-    getKeySearch();
-    navigate(`/detail/${key}`);
+    if(key) {
+      setStore("keysearch", key);
+      getKeySearch();
+      navigate(`/detail/${key}`);
+     }if (!key) {
+      return
+     }
     // window.location.reload();
   };
   const getJobCate = (id: number) => {

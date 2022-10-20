@@ -13,7 +13,13 @@ export default function Detail({}: Props) {
   let {keysearch} = params
   const { jobList } = useSelector((state: RootState) => state.jobReducers);
   setStoreJson("joblist", jobList);
-
+const renderResult = () =>{
+  if (jobList.length === 0) {
+     return  <h2>No results for "{keysearch}" </h2>
+  } if(jobList) {
+return <h2>Results for "{keysearch}" </h2>
+  }
+}
   const renderListJob = () => {
     return jobList?.map((job: JobListModel,index:number) => {
       // console.log(job)
@@ -64,7 +70,7 @@ export default function Detail({}: Props) {
   return (
     <div className="detail">
       <div className="container">
-        <h2> Results for "{keysearch}"</h2>
+      {renderResult()}
         {/* title detail */}
         <div className="header-detail">
           <div className="details-select">
