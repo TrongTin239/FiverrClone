@@ -64,12 +64,21 @@ export interface CongViec {
   saoCongViec: number;
 }
 
+export interface Comment {
+  ngayBinhLuan?: string;
+  noiDung?: string;
+  saoBinhLuan?: number;
+  tenNguoiBinhLuan?: string;
+  avatar?: string;
+}
 const initialState: any = {
   jobMenu: [],
   jobList: [],
   jobCate: [],
-  Component: <DetailJob/>,
+  Component: <DetailJob />,
   jobFromDetail: [],
+  DetailJob: [],
+  Comment: [],
 };
 
 const jobReducers = createSlice({
@@ -98,6 +107,14 @@ const jobReducers = createSlice({
     changeComponent: (state, action: PayloadAction) => {
       state.Component = <DetailJob />;
     },
+    getDetailJobAction: (state, action: PayloadAction<JobListModel>) => {
+      state.DetailJob = action.payload;
+      setStoreJson("detailJob", state.DetailJob);
+    },
+    getCommentAction: (state, action: PayloadAction<Comment>) => {
+      state.Comment = action.payload;
+      setStoreJson("comment",state.Comment)
+    },
   },
 });
 
@@ -108,6 +125,8 @@ export const {
   getJobFromDetailAction,
   changeComponentFromDetail,
   changeComponent,
+  getDetailJobAction,
+  getCommentAction,
 } = jobReducers.actions;
 
 export default jobReducers.reducer;
@@ -121,6 +140,7 @@ export const getJobMenu = () => {
       let jobMenuArr: JobModel[] = result.data.content;
       const action = getJobMenuAction(jobMenuArr);
       dispatch(action);
+      // console.log(action);
     } catch (err) {
       console.log(err);
     }
@@ -140,7 +160,7 @@ export const getJobList = (key: string | null) => {
       const jobListArr: JobListModel[] = result.data.content;
       const action = getJobListaction(jobListArr);
 
-      // console.log(action);
+      console.log(action);
 
       dispatch(action);
     } catch (err) {
@@ -177,6 +197,38 @@ export const getJobFromDetailApi = (id: number) => {
       // console.log(action);
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const getDetailJobApi = (id: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(`cong-viec/lay-cong-viec-chi-tiet/${id}`);
+      let detailJobArr: JobListModel = result.data.content;
+      const action = getDetailJobAction(detailJobArr);
+      dispatch(action);
+      // console.log(action);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getCommentApi =  (id: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(
+        `binh-luan/lay-binh-luan-theo-cong-viec/${id}`
+      );
+      const comment: Comment = result.data.content;
+      const action = getCommentAction(comment)
+      dispatch(action)
+      // console.log(action)
+    } catch (err) {
+      console.log(err);
+      setStoreJson("comment",[])
+    
     }
   };
 };

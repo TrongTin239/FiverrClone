@@ -10,6 +10,7 @@ export const config = {
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   },
+
   getCookie: (name: string) => {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -72,7 +73,7 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use(
-  (config:any) => {
+  (config: any) => {
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,

@@ -14,6 +14,7 @@ import Detail from "./pages/Detail/Detail";
 import "./assets/scss/style.scss";
 import Categories from "./pages/Categories/Categories";
 import JobFromDetail from "./templates/HomeTemplate/JobFromDetail";
+import JobDetail from "./pages/JobDetail/JobDetail";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -36,10 +37,14 @@ root.render(
           <Route path="categories" element={<HomeMain />}>
             <Route path=":id" element={<Categories />}></Route>
           </Route>
-         
+
+          <Route path="jobdetail" element={<HomeMain />}>
+            <Route path=":jobID" element={<JobDetail />}></Route>
+          </Route>
         </Routes>
-      </BrowserRouter>
+
      
+      </BrowserRouter>
     </Provider>
   </>
 );

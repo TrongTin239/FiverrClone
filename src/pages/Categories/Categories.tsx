@@ -68,10 +68,7 @@ export default function Categories({}: Props) {
   //   });
   // };
   useEffect(() => {
-    // renderCateBanner();
-    // renderJobCategories();
-//  console.log("first")
-    // document.querySelector(".JobDetail")?.classList.remove("d-none");
+
 
     // console.log(id);
   }, [params.id]);

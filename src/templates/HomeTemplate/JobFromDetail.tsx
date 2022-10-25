@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { RootState } from "../../redux/configStore";
-import { CongViec, JobListModel } from "../../redux/reducers/jobReducers";
+import { useNavigate, useParams } from "react-router-dom";
+import { AppDispatch, RootState } from "../../redux/configStore";
+import {
+  CongViec,
+  getCommentApi,
+  getDetailJobApi,
+  JobListModel,
+} from "../../redux/reducers/jobReducers";
 import {
   getStore,
   getStoreJson,
@@ -16,34 +22,50 @@ export default function JobFromDetail({}: Props) {
   let keySearch = getStore("keysearch");
   const params = useParams();
   let { keysearch } = params;
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const jobList = getStoreJson("jobFromDetail");
 
-  console.log(jobList);
+  // console.log(jobList);
+
+  const getDetailJob = (id: number) => {
+    const action = getDetailJobApi(id);
+    dispatch(action);
+  };
+  const getComment = (id: number) => {
+    const action = getCommentApi(id);
+    dispatch(action);
+  };
   const renderListJob = () => {
     return jobList?.map((job: JobListModel, index: number) => {
-      // console.log(job)
+      console.log(job.id);
       return (
         <div className="col-3" key={index}>
           <div className="card">
-            <img src={job.congViec.hinhAnh} alt="" />
+            <img
+              src={job.congViec.hinhAnh}
+              alt=""
+              onClick={() => {
+                getDetailJob(job.id);
+                getComment(job.id);
+                navigate(`/jobdetail/${job.id}`, { replace: true });
+              }}
+            />
             <div className="card-body">
               <div className="info">
                 <div className="avt">
                   <img src={job.avatar} alt="" />
                 </div>
                 <div className="name-lvl">
-                  <a href="">
-                    {job.tenNguoiTao}
-                  </a>
+                  <a href="">{job.tenNguoiTao}</a>
                   {/* <span>lvl2</span> */}
                 </div>
               </div>
               <div className="desc">
-                <p>
-                {job.congViec.tenCongViec}
-                </p>
+                <p>{job.congViec.tenCongViec}</p>
                 <div className="star">
-                  <i className="fa-solid fa-star"></i> {job.congViec.saoCongViec}
+                  <i className="fa-solid fa-star"></i>{" "}
+                  {job.congViec.saoCongViec}
                   <span className="rate-text">({job.congViec.danhGia})</span>
                 </div>
               </div>

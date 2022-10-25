@@ -61,6 +61,7 @@ export default function DetailJob({}: Props) {
             <div className="details-job">
               <ul>
                 {job.dsChiTietLoai.map((item, index) => {
+                 
                   return (
                     <li
                       id="li-tag"
