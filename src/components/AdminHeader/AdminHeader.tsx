@@ -7,6 +7,7 @@ import {
   } from '@ant-design/icons';
   import type { MenuProps } from 'antd';
   import { Breadcrumb, Layout, Menu } from 'antd';
+import { Components } from 'antd/lib/date-picker/generatePicker';
   import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
   
@@ -40,6 +41,7 @@ export default function AdminHeader(props: Props) {
           </Breadcrumb>
           <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
             {/* Bill is a cat. */}
+                {/* <Component ></Component> */}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
