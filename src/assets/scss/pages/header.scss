@@ -74,15 +74,18 @@
         margin-top: 26px;
       }
       ul {
+        padding-left: 0;
+
         display: flex;
         margin-top: 13px;
+        align-items: center;
         li {
-          padding-left: 15px;
-          margin-left: 10px;
+          font-size: 10px;
+          margin-left: 12px;
           // align-items: center;
 
           a {
-            font-size: $c1-text-s;
+            font-size: $c10-text-s;
             font-weight: $c3-text-w;
 
             #searchIcon {
@@ -91,6 +94,10 @@
           }
           .linkColor {
             color: $c2-text-cl;
+            .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+              background-color: transparent;
+              color: $c2-text-cl;
+            }
           }
           .disactiveColor {
             color: $c1-text-cl;
@@ -110,19 +117,18 @@
           }
         }
       }
-      @media screen and (max-width:1500px) {
+      @media screen and (max-width: 1500px) {
         ul {
           li {
             margin-left: 8px;
             padding: 0;
             a {
-             
               font-size: 14px;
             }
           }
         }
       }
-      @media screen and (max-width:1100px) {
+      @media screen and (max-width: 1100px) {
         ul {
           li {
             margin-left: 8px;
@@ -133,7 +139,7 @@
           }
         }
       }
-      @media screen and (max-width:1298px) {
+      @media screen and (max-width: 1298px) {
         .searchBar {
           display: none !important;
         }
@@ -149,28 +155,35 @@
           margin-right: 20px;
         }
       }
-      @media screen and (max-width:1100px) {
+      @media screen and (max-width: 1100px) {
         .li {
           display: none;
         }
       }
-      @media screen and (max-width:930px) {
+      @media screen and (max-width: 930px) {
         .sli {
           display: none;
         }
       }
-      @media screen and (max-width:900px) {
-        ul{
-        justify-content: flex-end;
-
+      @media screen and (max-width: 900px) {
+        ul {
+          justify-content: flex-end;
         }
         .tli {
           display: none;
         }
       }
     }
+    .col {
+      padding: 0;
+      margin: 0;
+    }
   }
   .active {
     background-color: $c2-bg-cl;
   }
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: transparent;
+  color: #fff;
 }

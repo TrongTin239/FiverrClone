@@ -160,7 +160,7 @@ export const getJobList = (key: string | null) => {
       const jobListArr: JobListModel[] = result.data.content;
       const action = getJobListaction(jobListArr);
 
-      console.log(action);
+     
 
       dispatch(action);
     } catch (err) {
