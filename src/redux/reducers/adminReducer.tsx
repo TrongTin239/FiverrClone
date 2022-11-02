@@ -22,9 +22,6 @@ export interface EditUser {
   value: Admin;
 }
 
-
-
-
 const initialState:any =  {
     arrAdmin:[],
     editUser:{}
@@ -96,7 +93,7 @@ export const addAdminApi = (values:string) => {
   };
 };
 
-export const editUserApi=(id:number)=>{
+export const editUserApi=(id:any)=>{
   return async (dispatch2: AppDispatch) => {
     try {
       let result = await http.get(`/users/${id}`);

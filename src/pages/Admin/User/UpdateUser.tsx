@@ -18,7 +18,7 @@ import { AppDispatch, RootState } from '../../../redux/configStore';
 import {useSelector,useDispatch} from 'react-redux'
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-import {updatUsereApi} from '../../../redux/reducers/adminReducer'
+import {updatUsereApi,editUserApi} from '../../../redux/reducers/adminReducer'
 
 type Props = {}
 type SizeType = Parameters<typeof Form>[0]['size'];
@@ -31,10 +31,10 @@ export default function UpdateService({}: Props) {
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
   setComponentSize(size);
   }
-  useEffect(()=>{
-      // let{id}=props.match.params;
-      // dispatch(editService(id))
-  })
+  useEffect(() => {
+    const { id } = params;
+    dispatch(editUserApi(id));
+  }, []);
 
 
   const formik=useFormik({
@@ -42,14 +42,16 @@ export default function UpdateService({}: Props) {
     initialValues:{
       id:editUser.id,
       email:editUser.email,
+      name:editUser.name,
       phone:editUser.phone,
       gender:editUser.gender,
       role:editUser.role,
       birthday:editUser.birthday
       },
       onSubmit: (values:any) => {
-          console.log(values);
-          dispatch(updatUsereApi(values))
+        const id = params.id as string;
+        const data={id,value:{...values}}
+          dispatch(updatUsereApi(data))
       }
   },
 )
@@ -75,9 +77,11 @@ return (
         <Radio.Button value="large">Large</Radio.Button>
       </Radio.Group>
     </Form.Item>
-    <Form.Item label="ID"rules={[{ required: true, message: 'Please input your phone number!' },]}>
+    <Form.Item label="ID"rules={[{ required: true, message: 'Please input your id number!' },]}>
       <Input name='id' onChange={formik.handleChange} value={editUser.id}  />
-      
+    </Form.Item>
+    <Form.Item label="name"rules={[{ required: true, message: 'Please input your name number!' },]}>
+      <Input name='name'onChange={formik.handleChange} value={formik.values.name} />
     </Form.Item>
     <Form.Item label="email"rules={[{ required: true, message: 'Please input your email number!' },]}>
       <Input name='email'onChange={formik.handleChange} value={formik.values.email} />

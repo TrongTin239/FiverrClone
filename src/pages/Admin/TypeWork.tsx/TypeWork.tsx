@@ -5,7 +5,7 @@ import {SearchOutlined,EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useSelector,useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/configStore';
-import {deletTypeWorkApi, getTypeWorkApi,updateServiceApi } from '../../../redux/reducers/typeWorkReducer'
+import {deletTypeWorkApi, getTypeWorkApi,searchTypeWorkApi,updateServiceApi } from '../../../redux/reducers/typeWorkReducer'
 import { history } from '../../../index';
 
 type Props = {}
@@ -85,12 +85,20 @@ export default function TypeWork({}: Props) {
   ];
   
   const data: DataType[] = arrTypeWork;
-  
+  const { Search } = Input;
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
-  const onSearch = (value: string) => console.log(value);
-  const { Search } = Input;
+  const onSearch = (value: string) => {
+    if (value) {
+      dispatch(searchTypeWorkApi(value));
+    }
+  };
+  const onChange1 = (value:any) => {
+    if (!value.target.value) {
+      dispatch(getTypeWorkApi());
+    }
+  };
  
 
   return (
@@ -103,6 +111,7 @@ export default function TypeWork({}: Props) {
           enterButton={<SearchOutlined />}
           size="large"
           onSearch={onSearch}
+          onChange={onChange1}
           />
         <Table columns={columns} dataSource={data} onChange={onChange} />
       </div>

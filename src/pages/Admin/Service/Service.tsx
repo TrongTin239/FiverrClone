@@ -78,9 +78,6 @@ export default function Service({}: Props) {
     if (value) {
       dispatch(searcServiceApi(value));
     }
-    // else if(value=== ''){
-    //   dispatch(getadmintApi());
-    // }
   };
   const onChange1 = (value:any) => {
     if (!value.target.value) {

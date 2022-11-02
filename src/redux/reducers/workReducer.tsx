@@ -26,10 +26,13 @@ const workReducer = createSlice({
     getEditWorkAction:(state,action:PayloadAction<Work>)=>{
       state.editWork=action.payload;
   },
+  searchWorkAction:(state,action:PayloadAction<Work[]>)=>{
+    state.arrService=action.payload;
+}
   }
 });
 
-export const {getWorkAction,getEditWorkAction} = workReducer.actions
+export const {getWorkAction,getEditWorkAction,searchWorkAction} = workReducer.actions
 
 export default workReducer.reducer
 
@@ -61,9 +64,6 @@ export const addWorkApi = (values:string) => {
     }
   };
 };
-
-
-
 export const editWorkApi=(id:string)=>{
   return async (dispatch2: AppDispatch) => {
     try {
@@ -87,4 +87,18 @@ export const deleteWorkApi=(id: number)=>{
         alert('xoa khong thanh cong')
     }
 }
+};
+export const searchWorkApi = (Keywork: any) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.get(`/cong-viec?keyword=${Keywork}`);
+      let seach:Work[]=result.data.content;
+      // console.log(seach)
+      const action=searchWorkAction(seach)
+      dispatch(action);
+      console.log(action)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };

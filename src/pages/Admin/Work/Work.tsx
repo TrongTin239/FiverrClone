@@ -5,7 +5,7 @@ import {SearchOutlined,EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useSelector,useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/configStore';
-import {getWorkApi, deleteWorkApi, editWorkApi } from '../../../redux/reducers/workReducer'
+import {getWorkApi, deleteWorkApi, editWorkApi,searchWorkApi } from '../../../redux/reducers/workReducer'
 import { history } from '../../../index';
 
 type Props = {}
@@ -73,7 +73,16 @@ export default function Work({}: Props) {
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
-  const onSearch = (value: string) => console.log(value);
+  const onSearch = (value: string) => {
+    if (value) {
+      dispatch(searchWorkApi(value));
+    }
+  };
+  const onChange1 = (value:any) => {
+    if (!value.target.value) {
+      dispatch(getWorkApi());
+    }
+  };
   const { Search } = Input;
  
 
@@ -87,6 +96,7 @@ export default function Work({}: Props) {
         enterButton={<SearchOutlined />}
         size="large"
         onSearch={onSearch}
+        onChange={onChange1}
         />
       <Table columns={columns} dataSource={data} onChange={onChange} />
     </div>               

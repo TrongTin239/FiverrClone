@@ -9,8 +9,15 @@ export interface Service{
     maNguoiThue: number,
     ngayThue: string,
     hoanThanh: boolean
-
 }
+export interface ServiceModel{
+  id?: number ,
+  maCongViec: number,
+  maNguoiThue: number,
+  ngayThue: string,
+  hoanThanh: boolean
+}
+
 const initialState:any = {
     arrService:[],
     editService:{}
@@ -77,7 +84,7 @@ export const getServiceApi = () => {
       }
     };
   }
-  export const updateServiceApi=(data: any) => {
+  export const updateServiceApi=(data: ServiceModel) => {
     return async (dispatch: AppDispatch) => {
       try {
         const result = await http.post('/thue-cong-viec/', data);

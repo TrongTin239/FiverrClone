@@ -26,10 +26,13 @@ const typerWorkReducer = createSlice({
     getEditTypeWorkAction:(state,action:PayloadAction<TypeWork>)=>{
       state.editService=action.payload;
   },
+    searchTypeWorkAction:(state,action:PayloadAction<TypeWork[]>)=>{
+    state.arrTypeWork=action.payload;
+}
   }
 });
 
-export const {getTypeWorkAction,getEditTypeWorkAction} = typerWorkReducer.actions
+export const {getTypeWorkAction,getEditTypeWorkAction,searchTypeWorkAction} = typerWorkReducer.actions
 
 export default typerWorkReducer.reducer
 
@@ -94,6 +97,20 @@ export const getTypeWorkApi = () => {
         dispatch(getTypeWorkApi());
         console.log(result.data.content)
         alert('update admin thanh cong');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  export const searchTypeWorkApi = (Keywork: any) => {
+    return async (dispatch: AppDispatch) => {
+      try {
+        const result = await http.get(`/chi-tiet-loai-cong-viec/phan-trang-tim-kiem?keyword=${Keywork}`);
+        let seach:TypeWork[]=result.data.content;
+        // console.log(seach)
+        const action=searchTypeWorkAction(seach)
+        dispatch(action);
+        console.log(action)
       } catch (error) {
         console.log(error);
       }

@@ -80,10 +80,10 @@ return (
       
     </Form.Item>
     <Form.Item label="maCongViec"rules={[{ required: true, message: 'Please input your maCongViec number!' },]}>
-      <Input name='maCongViec'onChange={formik.handleChange} value={formik.values.maCongViec} />
+      <InputNumber name='maCongViec'onChange={formik.handleChange} value={formik.values.maCongViec} />
     </Form.Item>
     <Form.Item label="maNguoiThue" rules={[{ required: true, message: 'Please input your maNguoiThue number!' },]}>
-      <Input name='maNguoiThue' onChange={formik.handleChange}value={formik.values.maNguoiThue} />
+      <InputNumber name='maNguoiThue' onChange={formik.handleChange}value={formik.values.maNguoiThue} />
     </Form.Item>
     
     <Form.Item label="ngayThue">
