@@ -72,7 +72,7 @@ const handleChangeDatePicker=(value:any)=>{
           </Radio.Group>
         </Form.Item>
         <Form.Item label="Email"rules={[{ type:"email", required: true, message: 'The input is not valid E-mail!',}]}>
-          <Input name='email' onChange={formik.handleChange} />
+          <Input name='email'type='email' onChange={formik.handleChange} />
         </Form.Item>
         <Form.Item label="password" rules={[
               {
@@ -80,10 +80,10 @@ const handleChangeDatePicker=(value:any)=>{
                 message: 'Please input your password!',
               },
             ]}>
-          <Input name='password'onChange={formik.handleChange}/>
+          <Input name='password'type='password' onChange={formik.handleChange}/>
         </Form.Item>
         <Form.Item label="setPassword">
-          <Input name='setPassword' onChange={formik.handleChange}/>
+          <Input name='setPassword'type='password' onChange={formik.handleChange}/>
         </Form.Item>
         <Form.Item label="Phone" rules={[
               {
@@ -91,7 +91,7 @@ const handleChangeDatePicker=(value:any)=>{
                 message: 'Please input your phone!',
               },
             ]}>
-          <Input name='phone' onChange={formik.handleChange}/>
+          <Input name='phone' type='phone' onChange={formik.handleChange} />
         </Form.Item>
         <Form.Item label="birthday" rules={[{required: true,},]}>
           <DatePicker name='birthday' format={'DD/MM/YYYY'} onChange={handleChangeDatePicker}/>

@@ -26,10 +26,13 @@ const servicerReducer = createSlice({
     getEditServiceAction:(state,action:PayloadAction<Service>)=>{
       state.editService=action.payload;
   },
+  searchServiceAction:(state,action:PayloadAction<Service[]>)=>{
+    state.arrService=action.payload;
+}
   }
 });
 
-export const {getServicerAction,getEditServiceAction} = servicerReducer.actions
+export const {getServicerAction,getEditServiceAction,searchServiceAction} = servicerReducer.actions
 
 export default servicerReducer.reducer
 
@@ -77,11 +80,38 @@ export const getServiceApi = () => {
   export const updateServiceApi=(data: any) => {
     return async (dispatch: AppDispatch) => {
       try {
-        const result = await http.post('/thue-cong-viec', data);
+        const result = await http.post('/thue-cong-viec/', data);
         // customHistory.push('/admin/management-user');
         dispatch(getServiceApi());
         console.log(result.data.content)
         alert('update admin thanh cong');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  export const deleteServiceApi=(id: number)=>{
+    return async(dispatch:AppDispatch)=>{
+      try{
+        const result=await http.delete(`/thue-cong-viec/${id}`);
+        console.log(result.data.message)
+        dispatch(getServiceApi());
+      }
+      catch(err){
+          console.log(err)
+          alert('xoa khong thanh cong')
+      }
+  }
+};
+  export const searcServiceApi = (Keywork: any) => {
+    return async (dispatch: AppDispatch) => {
+      try {
+        const result = await http.get(`/thue-cong-viec/phan-trang-tim-kiem?keyword=${Keywork}`);
+        let seach:Service[]=result.data.content;
+        // console.log(seach)
+        const action=searchServiceAction(seach)
+        dispatch(action);
+        console.log(action)
       } catch (error) {
         console.log(error);
       }

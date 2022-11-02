@@ -8,8 +8,6 @@ export default function HomeMain({}: Props) {
   return (
     <>
       <AdminHeader />
-      <Outlet/>
-      {/* <Footer/> */}
     </>
   );
 }

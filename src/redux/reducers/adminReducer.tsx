@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { http } from "../../util/tool";
 import { AppDispatch } from '../configStore';
+import { history } from '../../index';
 
 export interface Admin{
     
@@ -26,7 +27,7 @@ export interface EditUser {
 
 const initialState:any =  {
     arrAdmin:[],
-    user:{}
+    editUser:{}
 }
 
 const adminReducer = createSlice({
@@ -37,7 +38,7 @@ const adminReducer = createSlice({
         state.arrAdmin=action.payload;
     },
     getUpdateAction:(state,action:PayloadAction<Admin>)=>{
-        state.user=action.payload;
+        state.editUser=action.payload;
     },
     searchUserAction:(state,action:PayloadAction<Admin[]>)=>{
         state.arrAdmin=action.payload;
@@ -75,7 +76,7 @@ export const deleteUseApi=(id: string)=>{
   }
   catch(err){
       console.log(err)
-      alert('email da ton tai vui long dang ki lai')
+      alert('xoa khong thanh cong')
   }
 
   }
@@ -88,13 +89,14 @@ export const addAdminApi = (values:string) => {
       const result = await http.post('/users',values);
       alert('them admin thanh cong');
       dispatch1(getadmintApi());
+      history.push('/admin/user')
     } catch (err) {
       console.log({ err });
     }
   };
 };
 
-export const updateUserApi=(id:string)=>{
+export const editUserApi=(id:number)=>{
   return async (dispatch2: AppDispatch) => {
     try {
       let result = await http.get(`/users/${id}`);
@@ -104,10 +106,10 @@ export const updateUserApi=(id:string)=>{
     }
   };
 }
-export const updateApi=(data: any) => {
+export const updatUsereApi=(data: EditUser) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.put(`/users`, data.value);
+      const result = await http.put(`/users/${data.id}`, data.value);
       // customHistory.push('/admin/management-user');
       dispatch(addAdminApi(result.data.content));
       alert('update admin thanh cong');

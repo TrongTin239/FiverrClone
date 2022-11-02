@@ -5,8 +5,9 @@ import {SearchOutlined,EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useSelector,useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/configStore';
-import {getadmintApi,updateApi } from '../../../redux/reducers/adminReducer'
+import {getadmintApi,deleteUseApi,searchUserApi, editUserApi } from '../../../redux/reducers/adminReducer'
 import { history } from '../../../index';
+import { Content } from 'antd/lib/layout/layout';
 
 type Props = {}
 interface DataType {
@@ -31,57 +32,39 @@ export default function User({}: Props) {
     {
       title: 'id',
       dataIndex:'id',
-      // sorter: {
-      //   compare: (a, b) => a.id - b.id,
-      //   multiple: 1,
-      // },
       sortDirections:['descend','ascend'],
-      // sortOrder:'descend'
       width:'15%'
     },
     {
       title: 'name ',
       dataIndex: 'name',
-      // sorter: {
-      //   compare: (a, b) => a.chinese - b.chinese,
-      //   multiple: 3,
-      // },
       width:'15%'
     },
     {
-      title: 'phone ',
-      dataIndex: 'phne',
-      // sorter: {
-      //   compare: (a, b) => a.math - b.math,
-      //   multiple: 2,
-      // },
+      title: 'email ',
+      dataIndex: 'email',
       width:'15%'
     },
     {
       title: 'birthday',
       dataIndex: 'birthday',
-      // sorter: {
-      //   compare: (a, b) => a.english - b.english,
-      //   multiple: 1,
-      // },
       width:'15%'
     },
     {
       title: 'role',
       dataIndex: 'role',
-      // sorter: {
-      //   compare: (a, b) => a.english - b.english,
-      //   multiple: 1,
-      // },
       width:'20%'
     },
     {
       title: '',
       dataIndex: '',
       render:(text,object:any)=>{return <Fragment>
-        <NavLink key={1} className=' mx-2 fs-3' to={`/admin/service/edit/${object.id}`} style={{color:'blue'}} onClick={() => {
-                dispatch(updateApi(object.id))}}><EditOutlined></EditOutlined></NavLink>
-        <NavLink key={2} className='fs-3' to='/' style={{color:'red'}}><DeleteOutlined></DeleteOutlined></NavLink>
+        <NavLink key={1} className=' mx-2 fs-3' to={`/admin/user/edit/${object.id}`} style={{color:'blue'}} onClick={() => {
+                dispatch(editUserApi(object.id))}}><EditOutlined></EditOutlined></NavLink>
+        <Button key={2} className='fs-3' onClick={() => {
+                dispatch(deleteUseApi(object.id))
+              }} style={{color:'red',border:'none'}}><DeleteOutlined></DeleteOutlined>
+        </Button>
       </Fragment>
     },
     width:'20%'
@@ -94,23 +77,35 @@ export default function User({}: Props) {
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
-  const onSearch = (value: string) => console.log(value);
   const { Search } = Input;
- 
+  const onSearch = (value: string) => {
+    if (value) {
+      dispatch(searchUserApi(value));
+    }
+    // else if(value=== ''){
+    //   dispatch(getadmintApi());
+    // }
+  };
+  const onChange1 = (value:any) => {
+    if (!value.target.value) {
+      dispatch(getadmintApi());
+    }
+  };
 
   return (
-      <div className="card-body  container">
-        <Button className='mt-5'onClick={()=>{
-          history.push('/admin/user/addAdmin')
-        }}>Add Admin</Button>
+      <Content>
+        <Button className='my-2 btn btn-warning text-white'onClick={()=>{
+          history.push('/admin/user/adduser')
+        }} size="large">Add Admin</Button>
         <Search
           placeholder="input search text"
           enterButton={<SearchOutlined />}
           size="large"
           onSearch={onSearch}
+          onChange={onChange1}
           />
           <Table columns={columns} dataSource={data} onChange={onChange} />
-      </div>
+      </Content>
                 
   )
 }

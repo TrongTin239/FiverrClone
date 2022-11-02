@@ -26,6 +26,14 @@ import TypeWork from "./pages/Admin/TypeWork.tsx/TypeWork";
 import { Switch } from "antd";
 import AdminTemplate from './templates/AdminTemplate/AdminTemplate'
 import ResponsiveItem from "./HOC/ResponsiveItem/ResponsiveItem";
+import AddUser from "./pages/Admin/User/AddUser";
+import AddService from "./pages/Admin/Service/AddService";
+import AddWork from "./pages/Admin/Work/AddWork";
+import AddTypeWork from "./pages/Admin/TypeWork.tsx/AddTypeWork";
+import UpdateUser from "./pages/Admin/User/UpdateUser";
+import UpdateSerivce from "./pages/Admin/Service/UpdateSerivce";
+import UpdateTypeWork from "./pages/Admin/TypeWork.tsx/UpdateTypeWork";
+import UpdateWork from "./pages/Admin/Work/UpdateWork";
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
@@ -56,9 +64,6 @@ root.render(
             <Route path="jobdetail" element={<HomeMain />}>
               <Route path=":jobID" element={<JobDetail />}></Route>
             </Route>
-            {/* <UserTemplate path='/' exact Component={UserTemplate}></UserTemplate> */}
-
-            
             <Route path="login" element={<Login></Login>}></Route>
             <Route path="signup" element={<Signup></Signup>}></Route>
           </Routes>
@@ -69,6 +74,14 @@ root.render(
                 <Route path="/admin/service" element={<ResponsiveItem Component={Service}></ResponsiveItem>}></Route>
                 <Route path="/admin/work" element={<ResponsiveItem Component={Work}></ResponsiveItem>}></Route>
                 <Route path="/admin/typeWork"element={<ResponsiveItem Component={TypeWork}></ResponsiveItem>}></Route>
+                <Route path="/admin/user/adduser" element={<ResponsiveItem Component={AddUser}></ResponsiveItem>}> </Route>
+                <Route path="/admin/service/addservice" element={<ResponsiveItem Component={AddService}></ResponsiveItem>}> </Route>
+                <Route path="/admin/work/addwork" element={<ResponsiveItem Component={AddWork}></ResponsiveItem>}> </Route>
+                <Route path="/admin/typeWork/addtypeWork" element={<ResponsiveItem Component={AddTypeWork}></ResponsiveItem>}> </Route>
+                <Route path="/admin/user/edit/:id" element={<ResponsiveItem Component={UpdateUser}></ResponsiveItem>}></Route>
+                <Route path="/admin/service/edit/:id" element={<ResponsiveItem Component={UpdateSerivce}></ResponsiveItem>}></Route>
+                <Route path="/admin/work/edit/:id" element={<ResponsiveItem Component={UpdateWork}></ResponsiveItem>}></Route>
+                <Route path="/admin/typework/edit/:id" element={<ResponsiveItem Component={UpdateTypeWork}></ResponsiveItem>}></Route>
               </Route>
           </Routes>  
       </HistoryRouter>
