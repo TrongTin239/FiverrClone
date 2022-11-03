@@ -268,21 +268,21 @@
         }
       }
     }
-    @media screen and (max-width: 376px) {
-      .col-4 {
-        .job-price {
-          width: 300px;
-        }
-      }
-    }
+
     @media screen and (max-width: 587px) {
       .col-4 {
         .job-price {
-          width: 500px;
+          width: 450px;
         }
       }
     }
-  
+    @media screen and (max-width: 400px) {
+      .col-4 {
+        .job-price {
+          width: 330px;
+        }
+      }
+    }
   }
   .row {
     .col-6 {

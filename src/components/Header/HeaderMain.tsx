@@ -84,15 +84,16 @@ export default function Header({}: Props) {
       return (
         <ul key={job.id}>
           <li className="header-job">
-            <a
+            <NavLink to={`/categories/${job.id}` } 
               onClick={() => {
+               
                 getJobCate(job.id);
-                dispatch(changeComponent());
-                navigate(`/categories/${job.id}`);
+                
+                // navigate(`/categories/${job.id}`);
               }}
             >
               {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}
-            </a>
+            </NavLink>
 
             <div
               className={

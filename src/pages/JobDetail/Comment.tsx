@@ -27,7 +27,7 @@ export default function CommentComponent({}: Props) {
   const comment = getStoreJson("comment");
   const id = Number(params.jobID);
 
-  useEffect(() => {}, [params.jobID, comment.lenght]);
+  useEffect(() => {}, [params.jobID]);
   const handleChange = (e: any) => {
     const text = e.target.value;
     userComment.current = text;
@@ -155,26 +155,7 @@ export default function CommentComponent({}: Props) {
           ) : (
             <CommentLogin />
           )}
-          {/* test comment input */}
-
-          <div className="input-area">
-            <div className="img">
-              <img
-                src="https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/c8cd50126f0b2073911e0adfb27ab0ce-1660135389451/45828900-ecc1-4d32-a7a1-d74fdda4e2e8.jpg"
-                alt="avt-cmt"
-              />
-            </div>
-            <div className="input">
-              <input
-                id="text"
-                type="text-area"
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-              />
-              <button type="submit">Add Comment</button>
-            </div>
-          </div>
+       
         </form>
       </div>
     </div>

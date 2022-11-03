@@ -23,7 +23,7 @@ export default function JobDetail({}: Props) {
   const userLogin = getStore("userLogin");
   const job = getStoreJson("detailJob");
   const params = useParams();
-const navigate  = useNavigate()
+  const navigate = useNavigate();
   const data = new RentJob();
   const dt = new Date();
   const day = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
@@ -163,7 +163,7 @@ const navigate  = useNavigate()
                       <Button
                         variant="primary"
                         onClick={() => {
-                         navigate("/login")
+                          navigate("/login");
                         }}
                       >
                         Yes
@@ -465,7 +465,7 @@ const navigate  = useNavigate()
                 </div>
               </div>
             </div>
-<CommentComponent/>
+            <CommentComponent />
             {/* {userLogin ? <CommentComponent /> : <CommentLogin />} */}
           </div>
         </div>
