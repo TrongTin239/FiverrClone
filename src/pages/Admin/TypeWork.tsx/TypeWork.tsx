@@ -31,39 +31,22 @@ export default function TypeWork({}: Props) {
     {
       title: 'id',
       dataIndex:'id',
-      // sorter: {
-      //   compare: (a, b) => a.id - b.id,
-      //   multiple: 1,
-      // },
       sortDirections:['descend','ascend'],
-      // sortOrder:'descend'
       width:'15%'
     },
     {
       title: 'tenNhom ',
       dataIndex: 'tenNhom',
-      // sorter: {
-      //   compare: (a, b) => a.chinese - b.chinese,
-      //   multiple: 3,
-      // },
       width:'20%'
     },
     {
       title: 'maLoaiCongviec ',
       dataIndex: 'maLoaiCongviec',
-      // sorter: {
-      //   compare: (a, b) => a.math - b.math,
-      //   multiple: 2,
-      // },
       width:'20%'
     },
     {
       title: 'ngayThue',
       dataIndex: 'ngayThue',
-      // sorter: {
-      //   compare: (a, b) => a.english - b.english,
-      //   multiple: 1,
-      // },
       width:'20%'
     },
     {

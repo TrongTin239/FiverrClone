@@ -1,57 +1,6 @@
-// import {
-//     DesktopOutlined,
-//     FileOutlined,
-//     PieChartOutlined,
-//     TeamOutlined,
-//     UserOutlined,
-//   } from '@ant-design/icons';
-// import { display } from '@mui/system';
-//   import type { MenuProps } from 'antd';
-//   import { Breadcrumb, Layout, Menu } from 'antd';
-// import { Components } from 'antd/lib/date-picker/generatePicker';
-//   import React, { useState } from 'react';
-// import { NavLink, Route, useNavigate, useNavigation } from 'react-router-dom';
-  
 
-// type Props = {
-//     title?:string
-// }
-// const { Header, Content, Footer, Sider } = Layout;
-  
-// // type MenuItem = Required<MenuProps>['items'][number];
-  
-// export default function AdminHeader(children:Props) {
-//     const items = [
-//         { label: 'User', key: '/admin/user',icon:<UserOutlined />}, // remember to pass the key prop
-//         { label: 'Service', key: '/admin/service',icon:<UserOutlined /> }, // which is required
-//         {label: 'Work', key: '/admin/work',icon:<UserOutlined />
-//         //   children: [{ label: 'item 3', key: 'submenu-item-1' }],
-//         },
-//         { label: 'TypeWork', key: '/admin/typeWork',icon:<UserOutlined /> },
-//       ];
-//     const navigate=useNavigate()
-//     const [collapsed, setCollapsed] = useState(false);
-//     // const toggleCollapsed = () => {
-//     //     setCollapsed(!collapsed);
-//     //   };
-//     return (
-//         <div style={{ display:'flex',flexDirection:'row' }}>
-//             {/* <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}> */}
-//                 <div className="logo" />
-//                 <Menu theme="dark" onClick={({key})=>{
-//                     navigate(key)
-//                 }} items={items}>
-//                     {/* <Menu.Item key="1" icon={<UserOutlined />}><NavLink to='/admin/user'>User</NavLink></Menu.Item>
-//                     <Menu.Item key="2"icon={<UserOutlined />}><NavLink to='/admin/service'>Service</NavLink></Menu.Item>
-//                     <Menu.Item key="3"icon={<UserOutlined />}> <NavLink to='/admin/work'>Work</NavLink></Menu.Item>
-//                     <Menu.Item key="4"icon={<UserOutlined />}><NavLink to='/admin/typeWork'>TypeWork</NavLink></Menu.Item>     */}
-//                 </Menu>
-//             <Content />
-//         </div>
-// );
-// };
 
-import React, { useState } from 'react';
+import React, { useState,Fragment } from 'react';
 import {
   EnvironmentOutlined,
   MenuFoldOutlined,
@@ -61,7 +10,11 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Dropdown } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate,redirect } from 'react-router-dom';
+import {useSelector} from 'react-redux'
+import { AppDispatch, RootState } from '../../redux/configStore';
+// import { history } from '../../../index';
+import { USER_LOGIN,eraseCookie, eraseStore,ACCESS_TOKEN } from '../../util/tool';
 type Props = {
   children?: JSX.Element;
 };
@@ -93,21 +46,35 @@ const MenuSider = [
 ];
 
 const MenuDropdown = [
+  // {
+  //   key: '1',
+  //   label: <a href='/'>Cập nhật thông tin</a>,
+  //   className: 'nav-link',
+  // },
   {
     key: '1',
-    label: <a href='/'>Cập nhật thông tin</a>,
-    className: 'nav-link',
-  },
-  {
-    key: '2',
-    label: <a href='/'>Đăng xuất</a>,
+    label: <button onClick={() => {
+      eraseStore();
+      eraseCookie(ACCESS_TOKEN);
+    }}>Login
+  </button>,
     className: 'nav-link',
   },
 ];
 
-export default function AdminHeader({ children }: Props) {
+export default function AdminHeader({}: Props) {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const {userLogin}=useSelector((state: RootState) => state.userReducer);
+  // if(!localStorage.getItem(USER_LOGIN)){
+  //   alert('ban khong co quyen truy cap vao trang nay !')
+  //   return history.push('/home')
+  // }
+  // if(userLogin.role !== "ADMIN"){
+  //   alert('ban khong co quyen truy cap vao trang nay !')
+  //   return history.push('/home')
+  // }
+
   return (
     <>
       <Layout>
@@ -143,7 +110,8 @@ export default function AdminHeader({ children }: Props) {
               <span className='label-user'>ADMIN</span>
               <Dropdown
                 overlay={<Menu items={MenuDropdown} />}
-                placement='bottomRight'
+                className=""
+                placement='topRight'
                 trigger={['click']}
                 overlayClassName='site-header__userLogin-dropdown'
               >

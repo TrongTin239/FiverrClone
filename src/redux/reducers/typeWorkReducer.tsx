@@ -13,7 +13,7 @@ export interface TypeWork{
 }
 const initialState:any = {
     arrTypeWork:[],
-    editService:{}
+    editTypeWork:{}
 }
 
 const typerWorkReducer = createSlice({
@@ -24,7 +24,7 @@ const typerWorkReducer = createSlice({
         state.arrTypeWork=action.payload;
     },
     getEditTypeWorkAction:(state,action:PayloadAction<TypeWork>)=>{
-      state.editService=action.payload;
+      state.editTypeWork=action.payload;
   },
     searchTypeWorkAction:(state,action:PayloadAction<TypeWork[]>)=>{
     state.arrTypeWork=action.payload;

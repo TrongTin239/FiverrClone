@@ -6,7 +6,9 @@ import { loginApi } from '../../redux/reducers/userReducer';
 import { AppDispatch, RootState } from '../../redux/configStore';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Card } from 'antd';
 
+const { Meta } = Card;
 
 type Props = {}
 
@@ -31,11 +33,15 @@ export default function Login({}: Props) {
         console.log('Failed:', errorInfo);
       };
   return (
-    <div className='container row'>
-        <div className='col-6 '>
-            <img src='../img/avt.webp' style={{width:'200px'}} alt="..."></img>
-        </div>
-        <div className='col-6'>
+    <div className='container' style={{display:'flex',justifyContent:'center',alignItems:'center'
+    }}>
+        <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+        >
+          <Meta title="Europe Street beat" description="www.instagram.com" />
+        </Card>
         <Form
       name="basic"
       labelCol={{ span: 8 }}
@@ -73,7 +79,6 @@ export default function Login({}: Props) {
         </Button>
       </Form.Item>
     </Form>
-        </div>
     </div>
   );
 }

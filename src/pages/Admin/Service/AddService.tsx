@@ -36,13 +36,6 @@ export default function AddService({}: Props) {
       ngayThue:'',
       hoanThanh:false
       },
-      // validationSchema:Yup.object().shape({
-      //     id:Yup.number().required('email không được bỏ trống !'),
-      //     maCongViec: Yup.number().required('password không được bỏ trống !').min(1,'pass từ 1 - 32 ký tự!').max(32,'pass từ 1 - 32 ký tự!'),
-      //     maNguoiThue:Yup.number().oneOf([Yup.ref('password')],'mat khau chua khop').required('setpassword không được bỏ trống !'),
-      //     ngayThue:Yup.string().required('ngay thue không được bỏ trống !'),
-      //     hoanThanh:Yup.string().required('role khong duoc bo trong')
-      // }),
       onSubmit: (values:any) => {
           console.log(values);
           dispatch(addServiceApi(values))
@@ -91,7 +84,7 @@ return (
         </Radio.Group>
     </Form.Item>
     <Form.Item label="Nghiep vu">
-      <button type='submit'className='btn btn-success'>them Service</button>
+      <button type='submit'className='btn btn-success'>add Service</button>
     </Form.Item>
   </Form>
 );

@@ -51,7 +51,8 @@ export const loginApi = (userLogin:string) => {
     //   dispatch(getProfileApi());
     } catch (err) {
       console.log(err);
-      history.push('/Page404');
+      alert('Email hoặc password chưa đúng vui lòng đăng nhập lại')
+      // history.push('/Page404');
     }
   };
 };

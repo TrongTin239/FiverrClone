@@ -18,7 +18,7 @@ import { AppDispatch, RootState } from '../../../redux/configStore';
 import {useSelector,useDispatch} from 'react-redux'
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-import {updateServiceApi} from '../../../redux/reducers/serviceReducer'
+import {editServiceApi, updateServiceApi} from '../../../redux/reducers/serviceReducer'
 
 type Props = {}
 type SizeType = Parameters<typeof Form>[0]['size'];
@@ -31,10 +31,10 @@ export default function UpdateService({}: Props) {
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
   setComponentSize(size);
   }
-  useEffect(()=>{
-      // let{id}=props.match.params;
-      // dispatch(editService(id))
-  })
+  useEffect(() => {
+    const { id } = params;
+    dispatch(editServiceApi(id));
+  }, []);
 
 
   const formik=useFormik({
@@ -43,13 +43,13 @@ export default function UpdateService({}: Props) {
       id:editService.id,
       maCongViec:editService.maCongViec,
       maNguoiThue:editService.maNguoiThue,
-      // gender:editService.gender,
-      // role:editService.role,
       ngayThue:editService.ngayThue
       },
       onSubmit: (values:any) => {
-          console.log(values);
-          dispatch(updateServiceApi(values))
+        // const id = params.id as string;
+        // const data={id,value:{...values}}
+        console.log(values);
+        dispatch(updateServiceApi(values))
       }
   },
 )

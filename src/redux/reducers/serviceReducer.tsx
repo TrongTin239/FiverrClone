@@ -7,15 +7,19 @@ export interface Service{
     id: number ,
     maCongViec: number,
     maNguoiThue: number,
-    ngayThue: string,
+    ngayThue: Date,
     hoanThanh: boolean
 }
 export interface ServiceModel{
   id?: number ,
   maCongViec: number,
   maNguoiThue: number,
-  ngayThue: string,
+  ngayThue: Date,
   hoanThanh: boolean
+}
+export interface EditService {
+  id: string;
+  value: Service;
 }
 
 const initialState:any = {
@@ -59,7 +63,7 @@ export const getServiceApi = () => {
       }
     };
   }
-  export const addServiceApi = (values:string) => {
+  export const addServiceApi = (values:Service) => {
     return async (dispatch1: AppDispatch) => {
       // console.log(getState())
       try {
@@ -73,7 +77,7 @@ export const getServiceApi = () => {
   };
 
 
-  export const editServiceApi=(id:string)=>{
+  export const editServiceApi=(id:any)=>{
     return async (dispatch2: AppDispatch) => {
       try {
         let result = await http.get(`/thue-cong-viec/${id}`);
@@ -87,11 +91,11 @@ export const getServiceApi = () => {
   export const updateServiceApi=(data: ServiceModel) => {
     return async (dispatch: AppDispatch) => {
       try {
-        const result = await http.post('/thue-cong-viec/', data);
+        const result = await http.put(`/thue-cong-viec`, data);
         // customHistory.push('/admin/management-user');
         dispatch(getServiceApi());
         console.log(result.data.content)
-        alert('update admin thanh cong');
+        alert('update Service thanh cong');
       } catch (error) {
         console.log(error);
       }
@@ -113,7 +117,7 @@ export const getServiceApi = () => {
   export const searcServiceApi = (Keywork: any) => {
     return async (dispatch: AppDispatch) => {
       try {
-        const result = await http.get(`/thue-cong-viec/phan-trang-tim-kiem?keyword=${Keywork}`);
+        const result = await http.get('/thue-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5');
         let seach:Service[]=result.data.content;
         // console.log(seach)
         const action=searchServiceAction(seach)

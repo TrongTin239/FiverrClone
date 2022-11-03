@@ -89,7 +89,7 @@ export default function Service({}: Props) {
       <div className="card-body  container">
         <Button className='mt-5'onClick={()=>{
           history.push('/admin/service/addservice')
-          }}>Them cong viec</Button>
+          }}>Add Service</Button>
         <Search
           placeholder="input search text"
           enterButton={<SearchOutlined />}
