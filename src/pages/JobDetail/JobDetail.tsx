@@ -217,7 +217,7 @@ export default function JobDetail({}: Props) {
             <h2>{item.congViec.tenCongViec}</h2>
             <div className="seller-info">
               <div className="avt">
-                <img src={item.avatar} alt="..." />
+                <img src={!item.avatar ? "https://picsum.photos/200/300" : item.avatar} alt="..." />
               </div>
               <div className="name-level">
                 <p className="name">{item.tenNguoiTao}</p>

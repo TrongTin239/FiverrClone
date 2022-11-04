@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 type Props = {}
 
@@ -8,11 +8,9 @@ export default function CommentLogin({}: Props) {
   return (
     <div className='cmt-login'>
       <div className="text"
-      onClick={() =>{
-        navigate("/login")
-      }}
+    
       >
-       <p>Login for comment!</p>
+       <NavLink to={"/login"} target={"_parent"}>Login for comment!</NavLink>
       </div>
     </div>
   )

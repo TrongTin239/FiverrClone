@@ -41,20 +41,24 @@ export default userReducer.reducer;
 
 export const loginApi = (userLogin: string) => {
   return async (dispatch: AppDispatch) => {
+    
     try {
       const result = await http.post("auth/signin", userLogin);
       setCookie(ACCESS_TOKEN, result.data.content.token, 15);
       setStore(ACCESS_TOKEN, result.data.content.token);
       setStoreJson(USER_LOGIN, result.data.content.user);
       alert("dang nhap thanh cong");
-      // history.push('/');
       console.log(result.data.content);
       //   dispatch(getProfileApi());
+     
+      // window.location.reload() 
     } catch (err) {
       console.log(err);
       alert("Email hoặc password chưa đúng vui lòng đăng nhập lại");
       // history.push('/Page404');
     }
+    history.push('/');
+
   };
 };
 

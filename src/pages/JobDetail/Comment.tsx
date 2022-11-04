@@ -85,7 +85,7 @@ export default function CommentComponent({}: Props) {
         <div className="row" key={index}>
           <div className="col-2 ava">
             <div className="img">
-              <img src={comment.avatar} alt="avt" />
+              <img src={!comment.avatar ? "https://picsum.photos/200/300" : comment.avatar} alt="avt" />
             </div>
           </div>
           <div className="col-8 main-content">
@@ -138,7 +138,7 @@ export default function CommentComponent({}: Props) {
             <div className="input-area">
               <div className="img">
                 <img
-                  src="https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/c8cd50126f0b2073911e0adfb27ab0ce-1660135389451/45828900-ecc1-4d32-a7a1-d74fdda4e2e8.jpg"
+                  src={!comment.avatar ? "https://picsum.photos/200/300" : comment.avatar}
                   alt="avt-cmt"
                 />
               </div>

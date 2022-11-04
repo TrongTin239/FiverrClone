@@ -1,6 +1,6 @@
 import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
 import { Row, Col, FormControl, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 // import { Form } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { useTranslation } from "react-i18next";
 
 // import { Form } from "react-router-dom";
 
@@ -59,15 +58,16 @@ export default function Header({}: Props) {
           {t("signin")}
         </NavLink>
       );
-    } else if (userLogin) {
-      <NavLink
+    } 
+    return  <NavLink
         className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
-        to={`/login`}
+        to={`/`}
         target={"_parent"}
+        style={{backgroundColor:"transparent"}}
       >
-        Hello,
+        Hello, {userLogin.name}
       </NavLink>;
-    }
+    
   };
   const renderRegisterNavItem = () => {
     if (userLogin == null) {
@@ -75,7 +75,7 @@ export default function Header({}: Props) {
         <NavLink
           to={`/signup`}
           target={"_parent"}
-          style={{ borderRadius: "8px" }}
+     
         >
           <Button variant="outline-success"> {t("join")} </Button>
         </NavLink>
@@ -89,10 +89,11 @@ export default function Header({}: Props) {
           eraseStore();
           eraseCookie(ACCESS_TOKEN);
         }}
+        style={{ borderRadius: "8px",backgroundColor:"transparent" }}
       >
         <Button
           variant="outline-success"
-          style={{ backgroundColor: "transparent" }}
+        
         >
           {" "}
           Log out
@@ -132,6 +133,41 @@ export default function Header({}: Props) {
       return;
     }
   };
+  // const renderLoginNavItem = () => {
+  //   if (userLogin == null) {
+  //     return (
+  //       <a className={navbar ? " signIn linkColor" : "signIn disactiveColor"}href="/login">
+  //           {" "}Sign in{" "}
+  //       </a>
+  //     );
+  //   }
+  //   return (
+  //     <NavLink className='nav-link active' to='/profile'>
+  //       Hello {userLogin.name}
+  //     </NavLink>
+  //   );
+  // };
+  // const renderRegisterNavItem = () => {
+  //   if (userLogin == null) {
+  //     return (
+  //       <a href="signup">
+  //                 <Button variant="outline-success" > {t('join')} </Button>
+  //       </a>
+  //     );
+  //   }
+
+  //   return (
+  //     <a
+  //       className='nav-link'
+  //       href='/login'
+  //       onClick={() => {
+  //         eraseStore();
+  //         eraseCookie(ACCESS_TOKEN);
+  //       }}
+  //     >
+  //       Logout
+  //     </a>
+  //   )}
   return (
     <div className="header">
       <div className={navbar ? "nn active" : "nn"}>

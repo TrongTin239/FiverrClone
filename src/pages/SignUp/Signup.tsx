@@ -93,8 +93,10 @@ const handleChangeDatePicker=(value:any)=>{
         <Form.Item label="Email"rules={[{ type:"email", required: true, message: 'The input is not valid E-mail!',}]}>
           <Input name='email'type='email' onChange={formik.handleChange} />
         </Form.Item>
-      
-        <Form.Item label="Password" rules={[
+        <Form.Item label="name"rules={[{  required: true, message: 'The input is not valid Name',}]}>
+          <Input name='name'onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="password" rules={[
               {
                 required: true,
                 message: 'Please input your password!',
@@ -122,9 +124,9 @@ const handleChangeDatePicker=(value:any)=>{
               <Radio value={false}> female</Radio>
             </Radio.Group>
         </Form.Item>
-        <Form.Item label="Nghiep vu">
-          <button type='submit'className='btn btn-success'>Sign In</button>
-          <button className='btn btn-warning'><NavLink to='/login'>Login</NavLink> </button>
+        <Form.Item label="">
+          <button type='submit'className='btn btn-success mx-2'>Sign In</button>
+          <button className='btn btn-warning text-white'><NavLink to='/login'>Login</NavLink> </button>
         </Form.Item>
       </Form>
        </Col>
