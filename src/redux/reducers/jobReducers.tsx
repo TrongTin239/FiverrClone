@@ -105,7 +105,11 @@ const jobReducers = createSlice({
       state.Component = <JobFromDetail />;
     },
     changeComponent: (state, action: PayloadAction) => {
+      
       state.Component = <DetailJob />;
+
+      
+
     },
     getDetailJobAction: (state, action: PayloadAction<JobListModel>) => {
       state.DetailJob = action.payload;
@@ -160,7 +164,7 @@ export const getJobList = (key: string | null) => {
       const jobListArr: JobListModel[] = result.data.content;
       const action = getJobListaction(jobListArr);
 
-      console.log(action);
+     
 
       dispatch(action);
     } catch (err) {
@@ -176,6 +180,7 @@ export const getJobCateApi = (id: number) => {
       );
       const action = getJobCateAction(result.data.content);
       dispatch(action);
+      dispatch(changeComponent());
       // console.log(action)
     } catch (err) {}
   };

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
 import {
   CongViec,
@@ -38,19 +38,19 @@ export default function JobFromDetail({}: Props) {
   };
   const renderListJob = () => {
     return jobList?.map((job: JobListModel, index: number) => {
-      console.log(job.id);
       return (
         <div className="col-3" key={index}>
           <div className="card">
-            <img
-              src={job.congViec.hinhAnh}
-              alt=""
-              onClick={() => {
-                getDetailJob(job.id);
-                getComment(job.id);
-                navigate(`/jobdetail/${job.id}`, { replace: true });
-              }}
-            />
+            <NavLink to={`/jobdetail/${job.id}`} target={"_blank"}>
+              <img
+                src={job.congViec.hinhAnh}
+                alt=""
+                onClick={() => {
+                  getDetailJob(job.id);
+                  getComment(job.id);
+                }}
+              />
+            </NavLink>
             <div className="card-body">
               <div className="info">
                 <div className="avt">
@@ -58,11 +58,14 @@ export default function JobFromDetail({}: Props) {
                 </div>
                 <div className="name-lvl">
                   <a href="">{job.tenNguoiTao}</a>
-                  {/* <span>lvl2</span> */}
+                  <span>lvl2</span>
                 </div>
               </div>
               <div className="desc">
-                <p>{job.congViec.tenCongViec}</p>
+                <NavLink to={`/jobdetail/${job.id}`} target={"_blank"}>
+                  {" "}
+                  <p>{job.congViec.tenCongViec}</p>
+                </NavLink>
                 <div className="star">
                   <i className="fa-solid fa-star"></i>{" "}
                   {job.congViec.saoCongViec}

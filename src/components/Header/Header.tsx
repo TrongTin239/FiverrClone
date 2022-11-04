@@ -1,37 +1,79 @@
 import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
 import { Row, Col, FormControl, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-// import { Form } from "react-router-dom";
-import { AppDispatch, RootState } from "../../redux/configStore";
+import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, eraseCookie, eraseStore } from '../../util/tool';
+import { AppDispatch, RootState } from "../../redux/configStore";
+import { NavLink } from "react-router-dom";
 
+import { Select } from "antd";
 import {
+  getJobList,
   getJobMenu,
   JobListDetail,
   JobModel,
   ListDetailCate,
 } from "../../redux/reducers/jobReducers";
+import { setStore } from "../../util/tool";
 import Slider from "../Slider/Slider";
+import "antd/dist/antd.css";
+const { Option } = Select;
+
 type Props = {};
 
 export default function Header({}: Props) {
+  const { t, i18n } = useTranslation();
   const { jobMenu } = useSelector((state: RootState) => state.jobReducers);
   const { userLogin } = useSelector((state:RootState) => state.userReducer);
   const dispatch: AppDispatch = useDispatch();
   const [navbar, setNavbar] = useState<boolean>();
-
+  const navigate = useNavigate();
   // Navbar
+  const handleChangeLanguage = (value: string) => {
+    console.log(`selected ${value}`);
+    i18n.changeLanguage(value)
+  };
+  const changeBackground = () => {
+    if (window.scrollY >= 10) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+  window.addEventListener("scroll", changeBackground);
+
+  // input
+  const [key, setKey] = useState("");
+
+  const handleChange = (e: any) => {
+    setKey(e.target.value);
+  };
+  const getKeySearch = () => {
+    const action = getJobList(key);
+    dispatch(action);
+  };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    if (key) {
+      setStore("keysearch", key);
+      getKeySearch();
+      navigate(`/detail/${key}`);
+    }
+    if (!key) {
+      return;
+    }
+  };
   const renderLoginNavItem = () => {
     if (userLogin == null) {
       return (
-        <NavLink className='nav-link' to='/login'>
-          Login
-        </NavLink>
+        <a className={navbar ? " signIn linkColor" : "signIn disactiveColor"}href="/login">
+            {" "}Sign in{" "}
+        </a>
       );
     }
     return (
@@ -43,11 +85,12 @@ export default function Header({}: Props) {
   const renderRegisterNavItem = () => {
     if (userLogin == null) {
       return (
-        <NavLink className='nav-link' to='/signup'>
-          Register
-        </NavLink>
+        <a href="signup">
+                  <Button variant="outline-success" > {t('join')} </Button>
+        </a>
       );
     }
+    
     return (
       <a
         className='nav-link'
@@ -59,38 +102,8 @@ export default function Header({}: Props) {
       >
         Logout
       </a>
-    )
-  }
-  // const renderAdminNavItem = () => {
-  //   if (userLogin=== null && userLogin.role==='ADMIN') {
-  //     return (
-  //       <NavLink className='nav-link' to='/logn'>
-  //         Admin
-  //       </NavLink>
-  //     );
-  //   }
-  //   return (
-  //     <NavLink className='nav-link active' to='/admin'>
-  //       Admin {userLogin.name}
-  //     </NavLink>
-  //   );
-  // };
-
-
-
-
-  const changeBackground = () => {
-    if (window.scrollY >= 10) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  window.addEventListener("scroll", changeBackground);
-
-
+    )}
   return (
-  
     <div className="header">
       <div className={navbar ? "nn active" : "nn"}>
         <Row className="containerh  ">
@@ -115,11 +128,19 @@ export default function Header({}: Props) {
                 />
               </div>
               <div className={navbar ? "searchBar" : "searchBar searchHiden"}>
-                <Form className="d-flex">
+                <Form
+                  className="d-flex"
+                  onSubmit={(e) => {
+                    handleSubmit(e);
+                  }}
+                >
                   <FormControl
                     type="text"
                     placeholder="Search..."
                     className="mr-lg-8 input"
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
                   />
                   <button className="btn btn-dark searchLogo">
                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -137,11 +158,11 @@ export default function Header({}: Props) {
               </li>
               <li className="sli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  Explore
+                  {t('explore')}
                 </a>
               </li>
               <li className="sli">
-                <a className={navbar ? "linkColor" : "disactiveColor"} href="">
+                <span className={navbar ? "linkColor" : "disactiveColor"}>
                   <span className="global">
                     <FontAwesomeIcon
                       icon={faGlobe}
@@ -150,8 +171,19 @@ export default function Header({}: Props) {
                       id="searchIcon"
                     />
                   </span>
-                  <span> English</span>
-                </a>
+                  <span>
+                    {" "}
+                    <Select
+                      defaultValue="en"
+                      style={{ width: 120, backgroundColor: "transparent" }}
+                      onChange={handleChangeLanguage}
+                    >
+                      <Option value="en" >English</Option>
+
+                      <Option value="vi">VietNam</Option>
+                    </Select>
+                  </span>
+                </span>
               </li>
               <li className="tli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
@@ -161,17 +193,17 @@ export default function Header({}: Props) {
               </li>
               <li className="tli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  {" "}
-                  Become a Seller
+                  {t('Become a seller')}
                 </a>
               </li>
-              <li className='tli'>{renderLoginNavItem()}</li>
-              <li className='tli'>{renderRegisterNavItem()}</li>
-              {/* <li className="tli">{renderAdminNavItem()}</li> */}
+              <li className="bli">
+                  {renderLoginNavItem()}
+              </li>
               <li className="lli">
-                <a href="">
-                  <Button variant="outline-success"> Join</Button>
-                </a>
+                {renderRegisterNavItem()}
+              </li>
+              <li className="tli">
+                <NavLink to='/admin' >admin</NavLink>
               </li>
             </ul>
           </Col>

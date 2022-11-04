@@ -13,7 +13,9 @@ import {
 } from "react-router-dom";
 // import { Form } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
+import { useTranslation } from "react-i18next";
 
+import { Select } from "antd";
 import {
   changeComponent,
   changeComponentFromDetail,
@@ -28,9 +30,13 @@ import {
 
 import { getStore, setStore } from "../../util/tool";
 import Slider from "../Slider/Slider";
+
+import "antd/dist/antd.css";
+const { Option } = Select;
 type Props = {};
 
 export default function Header({}: Props) {
+  const { t, i18n } = useTranslation();
   const { jobMenu } = useSelector((state: RootState) => state.jobReducers);
   const dispatch: AppDispatch = useDispatch();
   const [navbar, setNavbar] = useState<boolean>(true);
@@ -39,9 +45,16 @@ export default function Header({}: Props) {
 
   let keysearch: string | null = getStore("keysearch");
   // console.log(keysearch);
-
+  let input: any = document.querySelector(".input");
+  
+  useEffect(() => {
+    // input.innerHTML = keysearch;
+  }, [keysearch]);
   const [key, setKey] = useState("keysearch");
-
+  const handleChangeLanguage = (value: string) => {
+    console.log(`selected ${value}`);
+    i18n.changeLanguage(value);
+  };
   const handleChange = (e: any) => {
     setKey(e.target.value);
   };
@@ -49,16 +62,17 @@ export default function Header({}: Props) {
     const action = getJobList(keysearch);
     dispatch(action);
   };
- 
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if(key) {
+    if (key) {
       setStore("keysearch", key);
       getKeySearch();
       navigate(`/detail/${key}`);
-     }if (!key) {
-      return
-     }
+    }
+    if (!key) {
+      return;
+    }
     // window.location.reload();
   };
   const getJobCate = (id: number) => {
@@ -70,21 +84,22 @@ export default function Header({}: Props) {
       return (
         <ul key={job.id}>
           <li className="header-job">
-            <a
+            <NavLink to={`/categories/${job.id}` } 
               onClick={() => {
-                getJobCate(job.id)
-                dispatch(changeComponent())
-                navigate(`/categories/${job.id}`);
+               
+                getJobCate(job.id);
+                
+                // navigate(`/categories/${job.id}`);
               }}
             >
-              {" "}
-              {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}{" "}
-            </a>
+              {job.tenLoaiCongViec === "string" ? "" : job.tenLoaiCongViec}
+            </NavLink>
 
             <div
               className={
-                job.tenLoaiCongViec === "Music & Audio"
-                  ? " detail-job music"
+                job.tenLoaiCongViec === "Music & Audio" ||
+                job.tenLoaiCongViec === "Bussiness & Analyst"
+                  ? " detail-job music bussiness"
                   : "detail-job"
               }
             >
@@ -94,10 +109,7 @@ export default function Header({}: Props) {
                   <ul className="moreDetailCate" key={item.id}>
                     <h5> {item.tenNhom} </h5>
                     {item.dsChiTietLoai.map((i: ListDetailCate) => {
-                      return <li key={i.id}
-                    
-                      
-                      >{i.tenChiTiet}</li>;
+                      return <li key={i.id}>{i.tenChiTiet}</li>;
                     })}
                   </ul>
                 );
@@ -133,8 +145,8 @@ export default function Header({}: Props) {
                   src={require("../../assets/img/black-logo.png")}
                   alt=""
                   style={{ width: "100px", height: "40px" }}
-                  onClick={() =>{
-                    navigate("/")
+                  onClick={() => {
+                    navigate("/");
                   }}
                 />
               </div>
@@ -162,11 +174,11 @@ export default function Header({}: Props) {
               </li>
               <li className="sli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  Explore
+                  {t("explore")}
                 </a>
               </li>
               <li className="sli">
-                <a className={navbar ? "linkColor" : "disactiveColor"} href="">
+                <span className={navbar ? "linkColor" : "disactiveColor"}>
                   <span className="global">
                     <FontAwesomeIcon
                       icon={faGlobe}
@@ -175,8 +187,19 @@ export default function Header({}: Props) {
                       id="searchIcon"
                     />
                   </span>
-                  <span> English</span>
-                </a>
+                  <span>
+                    {" "}
+                    <Select
+                      defaultValue="en"
+                      style={{ width: 120, backgroundColor: "transparent" }}
+                      onChange={handleChangeLanguage}
+                    >
+                      <Option value="en">English</Option>
+
+                      <Option value="vi">VietNam</Option>
+                    </Select>
+                  </span>
+                </span>
               </li>
               <li className="tli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
@@ -186,8 +209,7 @@ export default function Header({}: Props) {
               </li>
               <li className="tli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  {" "}
-                  Become a Seller
+                  {t("Become a seller")}
                 </a>
               </li>
               <li className="bli">
@@ -197,13 +219,12 @@ export default function Header({}: Props) {
                   }
                   href=""
                 >
-                  {" "}
-                  Sign in{" "}
+                  {t("signin")}
                 </a>
               </li>
               <li className="lli">
                 <a href="">
-                  <Button variant="outline-success"> Join</Button>
+                  <Button variant="outline-success"> {t("join")} </Button>
                 </a>
               </li>
             </ul>

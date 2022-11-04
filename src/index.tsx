@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { createBrowserHistory } from 'history';
+import "./i18n"
 // import Demo from "./pages/Demo/Demo";
 import HomeMain from "./templates/HomeMain/HomeMain";
 import Detail from "./pages/Detail/Detail";
@@ -23,7 +23,6 @@ import User from "./pages/Admin/User/User";
 import Service from "./pages/Admin/Service/Service";
 import Work from "./pages/Admin/Work/Work";
 import TypeWork from "./pages/Admin/TypeWork.tsx/TypeWork";
-import { Switch } from "antd";
 import AdminTemplate from './templates/AdminTemplate/AdminTemplate'
 import ResponsiveItem from "./HOC/ResponsiveItem/ResponsiveItem";
 import AddUser from "./pages/Admin/User/AddUser";
@@ -34,6 +33,8 @@ import UpdateUser from "./pages/Admin/User/UpdateUser";
 import UpdateSerivce from "./pages/Admin/Service/UpdateSerivce";
 import UpdateTypeWork from "./pages/Admin/TypeWork.tsx/UpdateTypeWork";
 import UpdateWork from "./pages/Admin/Work/UpdateWork";
+import Demo from "./pages/Demo/demo";
+
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
@@ -85,6 +86,27 @@ root.render(
               </Route>
           </Routes>  
       </HistoryRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="" element={<HomeTeamplate />}>
+            <Route index element={<Home />}></Route>
+            <Route path="demo" element={<Demo />}></Route>
+          </Route>
+          <Route path="detail" element={<HomeMain />}>
+            <Route path=":keysearch" element={<Detail />}></Route>
+            {/* <Route path="categories" element={<Categories />}>
+            <Route path=":id" />
+          </Route> */}
+          </Route>
+          <Route path="categories" element={<HomeMain />}>
+            <Route path=":id" element={<Categories />}></Route>
+          </Route>
+
+          <Route path="jobdetail" element={<HomeMain />}>
+            <Route path=":jobID" element={<JobDetail />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Provider>
   </>
 );

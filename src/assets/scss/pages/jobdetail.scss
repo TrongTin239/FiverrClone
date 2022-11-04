@@ -1,6 +1,10 @@
 .container {
+  position: relative;
   .row {
+    // gap: 80px;
+    position: relative;
     .col-6 {
+      margin-right: 20px;
       .job-info {
         .joblist {
           margin-top: 30px;
@@ -141,11 +145,159 @@
           }
         }
       }
+    }
+    .col-4 {
+      margin-top: 30px;
+      position: relative;
+
+      .job-price {
+        position: sticky;
+        border: 1px solid $c4-bg-cl;
+        top: 0;
+
+        .main {
+          .row {
+            width: 100%;
+            margin: 0;
+            border-bottom: 1px solid $c4-bg-cl;
+            .col-4.border-col {
+              border-right: 1px solid $c4-bg-cl;
+              border-left: 1px solid $c4-bg-cl;
+              color: $c3-text-cl;
+              border-bottom: 3px solid $c1-bg-cl;
+            }
+            .col-4 {
+              cursor: pointer;
+              font-weight: $c3-text-w;
+              font-size: $c1-text-s;
+              text-align: center;
+              margin-top: 0;
+              padding: 10px 20px;
+            }
+          }
+          .content {
+            padding: 10px 20px;
+            .header-content {
+              margin: 20px 0;
+              display: flex;
+              justify-content: space-between;
+              .title {
+                font-weight: $c3-text-w;
+                font-size: $c2-text-s;
+              }
+              .price {
+                font-size: $c2-text-s;
+              }
+            }
+          }
+          .text {
+            p {
+              font-size: $c1-text-s;
+              font-weight: $c2-text-w;
+              color: $c4-text-cl;
+            }
+          }
+          .short-desc {
+            .header-desc {
+              ul {
+                display: flex;
+                gap: 20px;
+                li {
+                  .icon {
+                    i {
+                      margin-right: 10px;
+                    }
+                  }
+                  .day {
+                  }
+                  .text {
+                  }
+                }
+              }
+            }
+            .main-desc {
+              margin-bottom: 10px;
+              ul {
+                li {
+                  i {
+                    margin-right: 10px;
+                    color: $c3-text-cl;
+                  }
+                  span {
+                    color: $c4-text-cl;
+                  }
+                }
+              }
+            }
+            .form {
+              form {
+                button {
+                  width: 100%;
+                  padding: 10px 0;
+                  border: none;
+                  color: $c1-text-cl;
+                  background-color: $c1-bg-cl;
+                  border-radius: 5px;
+                  font-weight: $c3-text-w;
+                }
+              }
+            }
+            .compare {
+              margin-top: 10px;
+              p {
+                text-align: center;
+                color: $c3-text-cl;
+                font-weight: $c3-text-w;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .col-6 {
+        width: 100%;
+      }
+      .col-4 {
+        .job-price {
+          width: 600px;
+          .main {
+            .row {
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 587px) {
+      .col-4 {
+        .job-price {
+          width: 450px;
+        }
+      }
+    }
+    @media screen and (max-width: 400px) {
+      .col-4 {
+        .job-price {
+          width: 330px;
+        }
+      }
+    }
+  }
+  .row {
+    .col-6 {
       .faq {
+        margin-top: 20px;
         h3 {
         }
         .why {
           margin-bottom: 50px;
+          @media screen and (max-width: 768px) {
+            width: 100%;
+          }
+          @media screen and (max-width: 587px) {
+            width: 100%;
+          }
           .services {
             border-bottom: 1px solid;
             margin-bottom: 20px;
@@ -209,8 +361,11 @@
         }
         .rating {
           .row {
-        margin-bottom: 80px;
-            .col-6 {
+            margin-bottom: 80px;
+            .col-6.star-rating {
+              padding: 0;
+              margin: 0;
+
               .reviews {
                 p {
                   span.title {
@@ -229,6 +384,11 @@
                   tr {
                   }
                   td {
+                    @media screen and (max-width: 1100px) {
+                      span {
+                        font-size: 12px;
+                      }
+                    }
                   }
                   tr.star {
                     td.volumn {
@@ -241,6 +401,7 @@
                         border-radius: 20px;
                         &::after {
                           content: "";
+
                           width: 170px;
                           height: 10px;
                           position: absolute;
@@ -297,7 +458,7 @@
                 }
               }
             }
-            .col-6 {
+            .col-5 {
               .relevant {
                 .title {
                   text-align: right;
@@ -322,6 +483,18 @@
                   }
                 }
               }
+            }
+          }
+          @media screen and (max-width: 586px) {
+            display: none;
+          }
+          @media screen and (max-width: 1200px) {
+            .row {
+              width: 750px;
+            }
+            padding-left: 20px;
+            .col-6 {
+              width: max-content;
             }
           }
         }
@@ -364,7 +537,6 @@
                   }
                 }
                 .comment-text {
-
                   span {
                   }
                 }
@@ -373,23 +545,76 @@
               }
             }
           }
-          .add-comment{
-            form{
+          .add-comment {
+            form {
               height: 200px;
-
-              input{
-                width: 100%;
-                padding-bottom: 50px ;
-                &:focus{
-                  outline: none;
+              .input-area {
+                .img {
+                  margin-right: 20px;
+                }
+                display: flex;
+                .input {
+                  width: 500px;
+                  input {
+                    width: 100%;
+                    padding-bottom: 50px;
+                    height: 120px;
+                    &:focus {
+                      outline: none;
+                    }
+                  }
+                  button {
+                    margin-top: 30px;
+                    background-color: blue;
+                    border: none;
+                    padding: 10px 20px;
+                    color: $c1-text-cl;
+                    border-radius: 4px;
+                  }
                 }
               }
             }
           }
         }
+        .cmt-login {
+          text-align: center;
+          line-height: 50px;
+          width: 100%;
+          height: 50px;
+          border: 1px solid $c7-bg-cl;
+          border-radius: 5px;
+          .text {
+            color: $c4-text-cl;
+            p {
+              cursor: pointer;
+
+              // border-bottom: 1px solid;
+              &:hover {
+                text-decoration: dashed;
+              }
+            }
+          }
+        }
       }
-    }
-    .col-4 {
+      @media screen and (max-width: 500px) {
+        .rating {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        .rating {
+          padding-left: 20px;
+          // display: none;
+          .row {
+            .col-6 {
+              width: max-content;
+            }
+            .col-6.star-rating {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
     }
   }
 }

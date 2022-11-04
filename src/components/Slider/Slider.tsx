@@ -20,7 +20,7 @@ export default function Slider({}: Props) {
 
   const handleChange = (e: any) => {
     setKey(e.target.value);
-    console.log(key)
+    // console.log(key)
   };
   const getKeySearch = () => {
     const action = getJobList(key);

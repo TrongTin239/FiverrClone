@@ -5,6 +5,7 @@
  
     img{
       width: 100%;
+      
     }
     margin-top: 50px;
 
@@ -65,6 +66,7 @@
         padding: 8px 15px;
         display: flex;
         justify-content: center;
+        margin-bottom: 10px;
         align-items: center;
         background-color: $c2-bg-cl;
         box-shadow: 0 0.14px 2.29266px rgb(0 0 0 / 3%),
@@ -115,11 +117,13 @@
         .img {
           img {
             width: 100%;
+            height: 180px;
           }
         }
         .more-details {
           .group-name {
             margin: 10px 0;
+            height: 50px;
             h3 {
               font-size: $c2-text-s;
               font-weight: $c3-text-w;

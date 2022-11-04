@@ -50,7 +50,7 @@ dispatch(action)
               onClick={() => {
                 getDetailJob(job.id)
                 getComment(job.id)
-                navigate(`/jobdetail/${job.id}`, { replace: true });
+                navigate(`/jobdetail/${job.id}`);
               }}
             />
 
