@@ -48,7 +48,7 @@ export const config = {
     window.localStorage.clear();
   },
   ACCESS_TOKEN: "accessToken",
-  USER_LOGIN: "useLogin",
+  USER_LOGIN: "userLogin",
 };
 export const {
   setCookie,

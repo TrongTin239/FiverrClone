@@ -93,7 +93,8 @@ const handleChangeDatePicker=(value:any)=>{
         <Form.Item label="Email"rules={[{ type:"email", required: true, message: 'The input is not valid E-mail!',}]}>
           <Input name='email'type='email' onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label="password" rules={[
+      
+        <Form.Item label="Password" rules={[
               {
                 required: true,
                 message: 'Please input your password!',
@@ -112,7 +113,7 @@ const handleChangeDatePicker=(value:any)=>{
             ]}>
           <Input name='phone' type='phone' onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label="birthday" rules={[{required: true,},]}>
+        <Form.Item label="Birthday" rules={[{required: true,},]}>
           <DatePicker name='birthday' format={'DD/MM/YYYY'} onChange={handleChangeDatePicker}/>
         </Form.Item>
         <Form.Item label="Gender"rules={[{required: true,},]}>

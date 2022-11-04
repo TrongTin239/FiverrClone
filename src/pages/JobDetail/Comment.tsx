@@ -13,6 +13,7 @@ import {
   http,
   setStore,
   setStoreJson,
+  USER_LOGIN,
 } from "../../util/tool";
 import CommentLogin from "./CommentLogin";
 
@@ -21,7 +22,7 @@ type Props = {};
 export default function CommentComponent({}: Props) {
   const userComment = useRef({ comment: "" });
   const params = useParams();
-  const userLogin = getStore("userLogin");
+  const userLogin = getStoreJson(USER_LOGIN);
 
   const dispatch: AppDispatch = useDispatch();
   const comment = getStoreJson("comment");
@@ -50,7 +51,7 @@ export default function CommentComponent({}: Props) {
     const newData = {
       ...data,
       maCongViec: params.jobID,
-      maNguoiBinhLuan: 1410,
+      maNguoiBinhLuan: userLogin.id,
       ngayBinhLuan: day,
       noiDung: userComment.current,
       saoBinhLuan: 5,
