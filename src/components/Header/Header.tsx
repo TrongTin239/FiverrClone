@@ -34,11 +34,11 @@ export default function Header({}: Props) {
         </NavLink>
       );
     }
-    // return (
-    //   <NavLink className='nav-link active' to='/profile'>
-    //     Hello {userLogin.name}
-    //   </NavLink>
-    // );
+    return (
+      <NavLink className='nav-link active' to='/profile'>
+        Hello {userLogin.name}
+      </NavLink>
+    );
   };
   const renderRegisterNavItem = () => {
     if (userLogin == null) {
@@ -59,8 +59,25 @@ export default function Header({}: Props) {
       >
         Logout
       </a>
-    );
-  };
+    )
+  }
+  // const renderAdminNavItem = () => {
+  //   if (userLogin=== null && userLogin.role==='ADMIN') {
+  //     return (
+  //       <NavLink className='nav-link' to='/logn'>
+  //         Admin
+  //       </NavLink>
+  //     );
+  //   }
+  //   return (
+  //     <NavLink className='nav-link active' to='/admin'>
+  //       Admin {userLogin.name}
+  //     </NavLink>
+  //   );
+  // };
+
+
+
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -150,7 +167,7 @@ export default function Header({}: Props) {
               </li>
               <li className='tli'>{renderLoginNavItem()}</li>
               <li className='tli'>{renderRegisterNavItem()}</li>
-              <li className="tli"><NavLink to='admin'>admin</NavLink></li>
+              {/* <li className="tli">{renderAdminNavItem()}</li> */}
               <li className="lli">
                 <a href="">
                   <Button variant="outline-success"> Join</Button>
