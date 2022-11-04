@@ -99,6 +99,12 @@ return (
           <Radio value={false}> Female</Radio>
         </Radio.Group>
     </Form.Item>
+    <Form.Item label="Role">
+        <Radio.Group name='role'onChange={formik.handleChange}value={formik.values.role}  >
+          <Radio value='ADMIN'> ADMIN </Radio>
+          <Radio value='USER'> USER</Radio>
+        </Radio.Group>
+    </Form.Item>
     <Form.Item label=":">
       <button type='submit'className='btn btn-success'>Update User</button>
     </Form.Item>

@@ -51,7 +51,7 @@ const handleChangeDatePicker=(value:any)=>{
 
   return (
     <div className='register-container'>
-      <Title style={{ textAlign: "center" }}>Login</Title>
+      <Title style={{ textAlign: "center" }}>Sign in</Title>
 			<Row
 				style={{
 					width: "70%",
