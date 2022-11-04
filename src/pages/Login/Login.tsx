@@ -33,8 +33,7 @@ export default function Login({}: Props) {
         console.log('Failed:', errorInfo);
       };
   return (
-    <div className='container' style={{display:'flex',justifyContent:'center',alignItems:'center'
-    }}>
+    <div className='container' style={{display:'flex',justifyContent:'center',alignItems:'center',marginTop:'50px'}}>
         <Card
           hoverable
           style={{ width: 240 }}

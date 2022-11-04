@@ -13,7 +13,7 @@ import { Layout, Menu, Avatar, Dropdown } from 'antd';
 import { Outlet, useNavigate,redirect } from 'react-router-dom';
 import {useSelector} from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/configStore';
-// import { history } from '../../../index';
+import { history } from '../../index';
 import { USER_LOGIN,eraseCookie, eraseStore,ACCESS_TOKEN } from '../../util/tool';
 type Props = {
   children?: JSX.Element;

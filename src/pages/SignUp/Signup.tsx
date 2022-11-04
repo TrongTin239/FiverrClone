@@ -1,14 +1,14 @@
 import {
   Button,
-  Cascader,
+  Typography,
   DatePicker,
   Form,
   Input,
   InputNumber,
   Radio,
-  Select,
-  Switch,
-  TreeSelect,
+  Col,
+  Row,
+  Card,
 } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import React, { useState } from 'react';
@@ -19,10 +19,12 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { signupApi } from '../../redux/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
+import { margin } from '@mui/system';
 
 type Props = {}
 type SizeType = Parameters<typeof Form>[0]['size'];
-
+const { Title } = Typography;
+const { Meta } = Card;
 
 export default function Signup({}: Props) {
   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
@@ -48,13 +50,30 @@ const handleChangeDatePicker=(value:any)=>{
 }
 
   return (
-    <div className='container'>
-      <div className="row d-flex align-items-cente">
-        <div className="col-6">
-            <img src='./img/login.jpg' alt='...' className='w-100'/>
-        </div>
-        <div className="col-5">
-          <h3 className='text-center'>Dang ki</h3>
+    <div className='register-container'>
+      <Title style={{ textAlign: "center" }}>Login</Title>
+			<Row
+				style={{
+					width: "70%",
+					margin: "0 auto ",
+					background: "#fff",
+					borderRadius: "10px",
+					overflow: "hidden",
+          display:'flex',
+          alignItems:'center',
+          marginLeft:'400px'
+				}}
+			>
+				<Col>
+        <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+        >
+          <Meta title="Europe Street beat" description="www.instagram.com" />
+        </Card>
+        </Col>
+				<Col span={12} style={{ padding: "40px 40px", margin: "auto 0" }}>
             <Form
         onSubmitCapture={formik.handleSubmit}
         labelCol={{ span: 4 }}
@@ -107,8 +126,8 @@ const handleChangeDatePicker=(value:any)=>{
           <button className='btn btn-warning'><NavLink to='/login'>Login</NavLink> </button>
         </Form.Item>
       </Form>
-        </div>
-      </div>
+       </Col>
+       </Row>
     </div>
-  )
+    );
 }
