@@ -5,10 +5,14 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, FormControl, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import { Form } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
 import { useTranslation } from "react-i18next";
+
+// import { Form } from "react-router-dom";
+
+import { ACCESS_TOKEN, eraseCookie, eraseStore } from '../../util/tool';
 
 import { Select } from "antd";
 import {
@@ -28,6 +32,7 @@ type Props = {};
 export default function Header({}: Props) {
   const { t, i18n } = useTranslation();
   const { jobMenu } = useSelector((state: RootState) => state.jobReducers);
+  const { userLogin } = useSelector((state:RootState) => state.userReducer);
   const dispatch: AppDispatch = useDispatch();
   const [navbar, setNavbar] = useState<boolean>();
   const navigate = useNavigate();
@@ -36,6 +41,42 @@ export default function Header({}: Props) {
     console.log(`selected ${value}`);
     i18n.changeLanguage(value)
   };
+  const renderLoginNavItem = () => {
+    if (userLogin == null) {
+      return (
+        <NavLink className='nav-link' to='/login'>
+          Login
+        </NavLink>
+      );
+    }
+    // return (
+    //   <NavLink className='nav-link active' to='/profile'>
+    //     Hello {userLogin.name}
+    //   </NavLink>
+    // );
+  };
+  const renderRegisterNavItem = () => {
+    if (userLogin == null) {
+      return (
+        <NavLink className='nav-link' to='/signup'>
+          Register
+        </NavLink>
+      );
+    }
+    return (
+      <a
+        className='nav-link'
+        href='/login'
+        onClick={() => {
+          eraseStore();
+          eraseCookie(ACCESS_TOKEN);
+        }}
+      >
+        Logout
+      </a>
+    );
+  };
+
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
@@ -171,6 +212,9 @@ export default function Header({}: Props) {
                   {t('signin')}
                 </a>
               </li>
+              <li className='tli'>{renderLoginNavItem()}</li>
+              <li className='tli'>{renderRegisterNavItem()}</li>
+              <li className="tli"><NavLink to='admin'>admin</NavLink></li>
               <li className="lli">
                 <a href="">
                   <Button variant="outline-success" > {t('join')} </Button>

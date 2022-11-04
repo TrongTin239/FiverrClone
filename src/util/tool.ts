@@ -10,7 +10,6 @@ export const config = {
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   },
-
   getCookie: (name: string) => {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -41,10 +40,16 @@ export const config = {
     }
     return null;
   },
+  eraseCookie: (name:string) => {
+    document.cookie =
+      name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  },
+  eraseStore: () => {
+    window.localStorage.clear();
+  },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "useLogin",
 };
-
 export const {
   setCookie,
   getCookie,
@@ -52,6 +57,8 @@ export const {
   setStore,
   setStoreJson,
   getStoreJson,
+  eraseCookie,
+  eraseStore,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
@@ -61,11 +68,11 @@ export const {
  *
  */
 
-const DOMAIN = "https://fiverrnew.cybersoft.edu.vn/api/";
+ const DOMAIN = "https://fiverrnew.cybersoft.edu.vn/api/";
 
-const TOKEN_CYBERSOFT =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU";
-// câu hình Domain gửi đi
+ const TOKEN_CYBERSOFT =
+   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU";
+ // câu hình Domain gửi đi
 
 export const http = axios.create({
   baseURL: DOMAIN,
@@ -73,7 +80,7 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use(
-  (config: any) => {
+  (config:any) => {
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
