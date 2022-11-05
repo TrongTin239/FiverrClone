@@ -7,10 +7,12 @@ import { RentJob } from "../../Model/RentJob";
 import { RootState } from "../../redux/configStore";
 import { JobListModel } from "../../redux/reducers/jobReducers";
 import {
+  ACCESS_TOKEN,
   getStore,
   getStoreJson,
   setStore,
   setStoreJson,
+  USER_LOGIN,
 } from "../../util/tool";
 import CommentComponent from "./Comment";
 import Comment from "./Comment";
@@ -20,17 +22,19 @@ type Props = {};
 
 export default function JobDetail({}: Props) {
   const { DetailJob } = useSelector((state: RootState) => state.jobReducers);
-  const userLogin = getStore("userLogin");
+
   const job = getStoreJson("detailJob");
   const params = useParams();
   const navigate = useNavigate();
+const userLogin = getStoreJson(USER_LOGIN)
+const token = getStore(ACCESS_TOKEN)
   const data = new RentJob();
   const dt = new Date();
   const day = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
   const newData = {
     ...data,
     maCongViec: params.jobID,
-    maNguoiThue: 1221,
+    maNguoiThue: userLogin.id,
     ngayThue: day,
     hoanThanh: true,
   };
@@ -41,7 +45,7 @@ export default function JobDetail({}: Props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const RentJobApi = async () => {
+  const RentJobApi = async (token: string | null) => {
     try {
       const result = await axios({
         url: "https://fiverrnew.cybersoft.edu.vn/api/thue-cong-viec",
@@ -143,7 +147,7 @@ export default function JobDetail({}: Props) {
                         variant="primary"
                         onClick={() => {
                           handleClose();
-                          RentJobApi();
+                          RentJobApi(token);
                         }}
                       >
                         Yes

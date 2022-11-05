@@ -138,7 +138,7 @@ export default function Header({}: Props) {
       return (
         <ul key={job.id}>
           <li className="header-job">
-            <NavLink to={`/categories/${job.id}` } 
+            <NavLink to={`/categories/${job.id}`} 
               onClick={() => {
                
                 getJobCate(job.id);

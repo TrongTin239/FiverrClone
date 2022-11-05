@@ -95,7 +95,8 @@ export default function Categories({}: Props) {
           <ul>
             <li>
               <div className="img">
-                <img src="/img/logo-design.webp" alt="..." />
+              {/* logo-design.webp */}
+                <img src={require("../../assets/img/Logo-design.webp")} alt="..." />
               </div>
               <div className="text">
                 <span>Minimalist Logo Design</span>
