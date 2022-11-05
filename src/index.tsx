@@ -21,7 +21,7 @@ import "./assets/scss/style.scss";
 import Categories from "./pages/Categories/Categories";
 import JobFromDetail from "./templates/HomeTemplate/JobFromDetail";
 import JobDetail from "./pages/JobDetail/JobDetail";
-import Demo from "./pages/Demo/Demo";
+
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import Page404 from "./pages/Page404/Page404";
@@ -55,7 +55,7 @@ root.render(
         <Routes>
           <Route path="" element={<HomeTeamplate />}>
             <Route index element={<Home />}></Route>
-            <Route path="demo" element={<Demo />}></Route>
+            
           </Route>
           <Route path="detail" element={<HomeMain />}>
             <Route path=":keysearch" element={<Detail />}></Route>
