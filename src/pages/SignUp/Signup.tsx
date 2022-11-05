@@ -43,7 +43,7 @@ export default function Signup({}: Props) {
     onSubmit: (values:any) => {
         console.log(values);
         dispatch(signupApi(values))
-        navigate("/login")
+        navigate("/login") 
     }
 })
 const handleChangeDatePicker=(value:any)=>{
