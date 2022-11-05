@@ -18,7 +18,7 @@ import { AppDispatch, RootState } from '../../redux/configStore';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { signupApi } from '../../redux/reducers/userReducer';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { margin } from '@mui/system';
 
 type Props = {}
@@ -27,6 +27,7 @@ const { Title } = Typography;
 const { Meta } = Card;
 
 export default function Signup({}: Props) {
+  const navigate = useNavigate()
   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {setComponentSize(size);}
   const dispatch: AppDispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function Signup({}: Props) {
     onSubmit: (values:any) => {
         console.log(values);
         dispatch(signupApi(values))
+        navigate("/login")
     }
 })
 const handleChangeDatePicker=(value:any)=>{
@@ -51,7 +53,7 @@ const handleChangeDatePicker=(value:any)=>{
 
   return (
     <div className='register-container'>
-      <Title style={{ textAlign: "center" }}>Login</Title>
+      <Title style={{ textAlign: "center" }}>Sign up</Title>
 			<Row
 				style={{
 					width: "70%",
@@ -126,7 +128,7 @@ const handleChangeDatePicker=(value:any)=>{
         </Form.Item>
         <Form.Item label="">
           <button type='submit'className='btn btn-success mx-2'>Sign In</button>
-          <button className='btn btn-warning text-white'><NavLink to='/login'>Login</NavLink> </button>
+          {/* <button className='btn btn-warning text-white'><NavLink to='/login'>Login</NavLink> </button> */}
         </Form.Item>
       </Form>
        </Col>
