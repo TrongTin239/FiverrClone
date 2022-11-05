@@ -34,7 +34,7 @@ const token = getStore(ACCESS_TOKEN)
   const newData = {
     ...data,
     maCongViec: params.jobID,
-    maNguoiThue: userLogin.id,
+    maNguoiThue: userLogin?.id,
     ngayThue: day,
     hoanThanh: true,
   };
