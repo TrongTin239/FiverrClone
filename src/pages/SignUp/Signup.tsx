@@ -115,7 +115,7 @@ const handleChangeDatePicker=(value:any)=>{
             ]}>
           <Input name='phone' type='phone' onChange={formik.handleChange} />
         </Form.Item>
-        <Form.Item label="birthday" rules={[{required: true,},]}>
+        <Form.Item label="Birthday" rules={[{required: true,},]}>
           <DatePicker name='birthday' format={'DD/MM/YYYY'} onChange={handleChangeDatePicker}/>
         </Form.Item>
         <Form.Item label="Gender"rules={[{required: true,},]}>

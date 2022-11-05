@@ -28,7 +28,7 @@ import {
   ListDetailCate,
 } from "../../redux/reducers/jobReducers";
 
-import { getStore, setStore } from "../../util/tool";
+import { ACCESS_TOKEN, eraseCookie, eraseStore, getStore, getStoreJson, setStore, USER_LOGIN } from "../../util/tool";
 import Slider from "../Slider/Slider";
 
 import "antd/dist/antd.css";
@@ -41,6 +41,7 @@ export default function Header({}: Props) {
   const dispatch: AppDispatch = useDispatch();
   const [navbar, setNavbar] = useState<boolean>(true);
   const [searchParams, setSearchParams] = useSearchParams("keysearch");
+  const userLogin = getStoreJson(USER_LOGIN)
   const navigate = useNavigate();
 
   let keysearch: string | null = getStore("keysearch");
@@ -62,7 +63,60 @@ export default function Header({}: Props) {
     const action = getJobList(keysearch);
     dispatch(action);
   };
-
+  const renderLoginNavItem = () => {
+    if (!userLogin) {
+      return (
+        <NavLink
+          className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
+          to={`/login`}
+          target={"_parent"}
+        >
+          {t("signin")}
+        </NavLink>
+      );
+    } 
+    return  <NavLink
+        className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
+        to={`/`}
+        target={"_parent"}
+        style={{backgroundColor:"transparent"}}
+      >
+        Hello, {userLogin.name}
+      </NavLink>;
+    
+  };
+  const renderRegisterNavItem = () => {
+    if (userLogin == null) {
+      return (
+        <NavLink
+          to={`/signup`}
+          target={"_parent"}
+     
+        >
+          <Button variant="outline-success"> {t("join")} </Button>
+        </NavLink>
+      );
+    }
+    return (
+      <NavLink
+        className="nav-link"
+        to="/"
+        onClick={() => {
+          eraseStore();
+          eraseCookie(ACCESS_TOKEN);
+        }}
+        style={{ borderRadius: "8px",backgroundColor:"transparent" }}
+      >
+        <Button
+          variant="outline-success"
+        
+        >
+          {" "}
+          Log out
+        </Button>
+      </NavLink>
+    );
+  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (key) {
@@ -213,19 +267,21 @@ export default function Header({}: Props) {
                 </a>
               </li>
               <li className="bli">
-                <a
+                {/* <a
                   className={
                     navbar ? " signIn linkColor" : "signIn disactiveColor"
                   }
                   href=""
                 >
                   {t("signin")}
-                </a>
+                </a> */}
+{renderLoginNavItem()}
               </li>
               <li className="lli">
-                <a href="">
+                {/* <a href="">
                   <Button variant="outline-success"> {t("join")} </Button>
-                </a>
+                </a> */}
+                {renderRegisterNavItem()}
               </li>
             </ul>
           </Col>

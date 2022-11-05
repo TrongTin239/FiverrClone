@@ -5,10 +5,19 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, FormControl, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN, eraseCookie, eraseStore } from '../../util/tool';
+import { NavLink, useNavigate } from "react-router-dom";
+// import { Form } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { NavLink } from "react-router-dom";
+
+// import { Form } from "react-router-dom";
+
+import {
+  ACCESS_TOKEN,
+  eraseCookie,
+  eraseStore,
+  getStoreJson,
+  USER_LOGIN,
+} from "../../util/tool";
 
 import { Select } from "antd";
 import {
@@ -28,15 +37,71 @@ type Props = {};
 export default function Header({}: Props) {
   const { t, i18n } = useTranslation();
   const { jobMenu } = useSelector((state: RootState) => state.jobReducers);
-  const { userLogin } = useSelector((state:RootState) => state.userReducer);
+  const userLogin = getStoreJson(USER_LOGIN);
   const dispatch: AppDispatch = useDispatch();
+  // console.log(userLogin);
   const [navbar, setNavbar] = useState<boolean>();
   const navigate = useNavigate();
   // Navbar
   const handleChangeLanguage = (value: string) => {
     console.log(`selected ${value}`);
-    i18n.changeLanguage(value)
+    i18n.changeLanguage(value);
   };
+  const renderLoginNavItem = () => {
+    if (!userLogin) {
+      return (
+        <NavLink
+          className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
+          to={`/login`}
+          target={"_parent"}
+        >
+          {t("signin")}
+        </NavLink>
+      );
+    } 
+    return  <NavLink
+        className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
+        to={`/`}
+        target={"_parent"}
+        style={{backgroundColor:"transparent"}}
+      >
+        Hello, {userLogin.name}
+      </NavLink>;
+    
+  };
+  const renderRegisterNavItem = () => {
+    if (userLogin == null) {
+      return (
+        <NavLink
+          to={`/signup`}
+          target={"_parent"}
+     
+        >
+          <Button variant="outline-success"> {t("join")} </Button>
+        </NavLink>
+      );
+    }
+    return (
+      <NavLink
+        className="nav-link"
+        to="/"
+        onClick={() => {
+          eraseStore();
+          eraseCookie(ACCESS_TOKEN);
+        }}
+        style={{ borderRadius: "8px",backgroundColor:"transparent" }}
+      >
+        <Button
+          variant="outline-success"
+        
+        >
+          {" "}
+          Log out
+        </Button>
+      </NavLink>
+    );
+  };
+
   const changeBackground = () => {
     if (window.scrollY >= 10) {
       setNavbar(true);
@@ -68,41 +133,41 @@ export default function Header({}: Props) {
       return;
     }
   };
-  const renderLoginNavItem = () => {
-    if (userLogin == null) {
-      return (
-        <a className={navbar ? " signIn linkColor" : "signIn disactiveColor"}href="/login">
-            {" "}Sign in{" "}
-        </a>
-      );
-    }
-    return (
-      <NavLink className='nav-link active' to='/profile'>
-        Hello {userLogin.name}
-      </NavLink>
-    );
-  };
-  const renderRegisterNavItem = () => {
-    if (userLogin == null) {
-      return (
-        <a href="signup">
-                  <Button variant="outline-success" > {t('join')} </Button>
-        </a>
-      );
-    }
-    
-    return (
-      <a
-        className='nav-link'
-        href='/login'
-        onClick={() => {
-          eraseStore();
-          eraseCookie(ACCESS_TOKEN);
-        }}
-      >
-        Logout
-      </a>
-    )}
+  // const renderLoginNavItem = () => {
+  //   if (userLogin == null) {
+  //     return (
+  //       <a className={navbar ? " signIn linkColor" : "signIn disactiveColor"}href="/login">
+  //           {" "}Sign in{" "}
+  //       </a>
+  //     );
+  //   }
+  //   return (
+  //     <NavLink className='nav-link active' to='/profile'>
+  //       Hello {userLogin.name}
+  //     </NavLink>
+  //   );
+  // };
+  // const renderRegisterNavItem = () => {
+  //   if (userLogin == null) {
+  //     return (
+  //       <a href="signup">
+  //                 <Button variant="outline-success" > {t('join')} </Button>
+  //       </a>
+  //     );
+  //   }
+
+  //   return (
+  //     <a
+  //       className='nav-link'
+  //       href='/login'
+  //       onClick={() => {
+  //         eraseStore();
+  //         eraseCookie(ACCESS_TOKEN);
+  //       }}
+  //     >
+  //       Logout
+  //     </a>
+  //   )}
   return (
     <div className="header">
       <div className={navbar ? "nn active" : "nn"}>
@@ -158,7 +223,7 @@ export default function Header({}: Props) {
               </li>
               <li className="sli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  {t('explore')}
+                  {t("explore")}
                 </a>
               </li>
               <li className="sli">
@@ -178,7 +243,7 @@ export default function Header({}: Props) {
                       style={{ width: 120, backgroundColor: "transparent" }}
                       onChange={handleChangeLanguage}
                     >
-                      <Option value="en" >English</Option>
+                      <Option value="en">English</Option>
 
                       <Option value="vi">VietNam</Option>
                     </Select>
@@ -193,17 +258,28 @@ export default function Header({}: Props) {
               </li>
               <li className="tli">
                 <a className={navbar ? "linkColor" : "disactiveColor"} href="">
-                  {t('Become a seller')}
+                  {t("Become a seller")}
                 </a>
               </li>
               <li className="bli">
-                  {renderLoginNavItem()}
+                {/* <NavLink
+                  className={
+                    navbar ? " signIn linkColor" : "signIn disactiveColor"
+                  }
+                  to={`/login`}
+                  target={"_parent"}
+                >
+                  
+                  {t('signin')}
+                </NavLink> */}
+                {renderLoginNavItem()}
               </li>
+
               <li className="lli">
+                {/* <NavLink to={`/signup`}  target={"_parent"}>
+                  <Button variant="outline-success" > {t('join')} </Button>
+                </NavLink> */}
                 {renderRegisterNavItem()}
-              </li>
-              <li className="tli">
-                <NavLink to='/admin' >admin</NavLink>
               </li>
             </ul>
           </Col>
