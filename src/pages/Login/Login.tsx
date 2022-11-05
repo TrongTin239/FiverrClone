@@ -27,6 +27,7 @@ export default function Login({}: Props) {
         setStoreJson(USER_LOGIN, result.data.content.user);
         alert("dang nhap thanh cong");
         navigate("/");
+        // redirect("/")
         //   dispatch(getProfileApi());
       // history.push('/');
        
