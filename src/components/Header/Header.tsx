@@ -85,6 +85,7 @@ export default function Header({}: Props) {
       <NavLink
         className="nav-link"
         to="/"
+        target={"_parent"}
         onClick={() => {
           eraseStore();
           eraseCookie(ACCESS_TOKEN);

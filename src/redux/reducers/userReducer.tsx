@@ -39,28 +39,28 @@ export const { getProfileAction, getProductFavoriteAction } =
 
 export default userReducer.reducer;
 
-export const loginApi = (userLogin: string) => {
-  return async (dispatch: AppDispatch) => {
+// export const loginApi = (userLogin: string) => {
+//   return async (dispatch: AppDispatch) => {
     
-    try {
-      const result = await http.post("auth/signin", userLogin);
-      setCookie(ACCESS_TOKEN, result.data.content.token, 15);
-      setStore(ACCESS_TOKEN, result.data.content.token);
-      setStoreJson(USER_LOGIN, result.data.content.user);
-      alert("dang nhap thanh cong");
-      console.log(result.data.content);
-      //   dispatch(getProfileApi());
+//     try {
+//       const result = await http.post("auth/signin", userLogin);
+//       setCookie(ACCESS_TOKEN, result.data.content.token, 15);
+//       setStore(ACCESS_TOKEN, result.data.content.token);
+//       setStoreJson(USER_LOGIN, result.data.content.user);
+//       alert("dang nhap thanh cong");
+    
+//       //   dispatch(getProfileApi());
+//     // history.push('/');
      
-      // window.location.reload() 
-    } catch (err) {
-      console.log(err);
-      alert("Email hoặc password chưa đúng vui lòng đăng nhập lại");
-      // history.push('/Page404');
-    }
-    history.push('/');
+//       // window.location.reload() 
+//     } catch (err) {
+//       console.log(err);
+//       alert("Email hoặc password chưa đúng vui lòng đăng nhập lại");
+//       // history.push('/Page404');
+//     }
 
-  };
-};
+//   };
+// };
 
 export const signupApi = (values: string) => {
   return async (dispatch: AppDispatch) => {

@@ -8,6 +8,7 @@ import { CommentModel } from "../../Model/CommentModel";
 import { AppDispatch, RootState, store } from "../../redux/configStore";
 import { Comment, getCommentApi } from "../../redux/reducers/jobReducers";
 import {
+  ACCESS_TOKEN,
   getStore,
   getStoreJson,
   http,
@@ -23,6 +24,7 @@ export default function CommentComponent({}: Props) {
   const userComment = useRef({ comment: "" });
   const params = useParams();
   const userLogin = getStoreJson(USER_LOGIN);
+  const token = getStore(ACCESS_TOKEN);
 
   const dispatch: AppDispatch = useDispatch();
   const comment = getStoreJson("comment");
@@ -43,7 +45,7 @@ export default function CommentComponent({}: Props) {
     const res = getComment(id);
     return res;
   };
-  const getCommentFromUser = async () => {
+  const getCommentFromUser = async (token: string | null ) => {
     const data = new CommentModel();
     const dt = new Date();
     const day =
@@ -62,8 +64,7 @@ export default function CommentComponent({}: Props) {
         method: "post",
         data: newData,
         headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0MTAiLCJlbWFpbCI6InRyb25ndGluQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwibmJmIjoxNjY3Mjc2MzQ0LCJleHAiOjE2Njc4ODExNDR9.Iahj_7Hw__vxnAfa428Qnd1M-cffcHWGj-YWuz3m6bk",
+          token: token,
           tokenCybersoft:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU",
         },
@@ -77,7 +78,7 @@ export default function CommentComponent({}: Props) {
   };
 
   const handleSubmit = () => {
-    getCommentFromUser();
+    getCommentFromUser(token);
   };
   const renderComment = () => {
     return comment?.map((comment: Comment, index: number) => {
@@ -85,7 +86,14 @@ export default function CommentComponent({}: Props) {
         <div className="row" key={index}>
           <div className="col-2 ava">
             <div className="img">
-              <img src={!comment.avatar ? "https://picsum.photos/200/300" : comment.avatar} alt="avt" />
+              <img
+                src={
+                  !comment.avatar
+                    ? "https://picsum.photos/200/300"
+                    : comment.avatar
+                }
+                alt="avt"
+              />
             </div>
           </div>
           <div className="col-8 main-content">
@@ -138,7 +146,11 @@ export default function CommentComponent({}: Props) {
             <div className="input-area">
               <div className="img">
                 <img
-                  src={!comment.avatar ? "https://picsum.photos/200/300" : comment.avatar}
+                  src={
+                    !comment.avatar
+                      ? "https://picsum.photos/200/300"
+                      : comment.avatar
+                  }
                   alt="avt-cmt"
                 />
               </div>
@@ -156,7 +168,6 @@ export default function CommentComponent({}: Props) {
           ) : (
             <CommentLogin />
           )}
-       
         </form>
       </div>
     </div>

@@ -51,6 +51,7 @@ root.render(
   <>
     <Provider store={store}>
       <BrowserRouter>
+
         <Routes>
           <Route path="" element={<HomeTeamplate />}>
             <Route index element={<Home />}></Route>
@@ -58,32 +59,7 @@ root.render(
           </Route>
           <Route path="detail" element={<HomeMain />}>
             <Route path=":keysearch" element={<Detail />}></Route>
-            {/* <Route path="categories" element={<Categories />}>
-            <Route path=":id" />
-          </Route> */}
-          </Route>
-          <Route path="categories" element={<HomeMain />}>
-            <Route path=":id" element={<Categories />}></Route>
-          </Route>
-
-          <Route path="jobdetail" element={<HomeMain />}>
-            <Route path=":jobID" element={<JobDetail />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <HistoryRouter history={history}>
-        <Routes>
-          <Route path="" element={<HomeTeamplate />}>
-            <Route path="home" element={<Home />}>
-              <Route path="*" element={<Page404 />}></Route>
-            </Route>
-            {/* <Route path="demo" element={<Demo />}></Route> */}
-          </Route>
-          <Route path="detail" element={<HomeMain />}>
-            <Route path=":keysearch" element={<Detail />}></Route>
-            {/* <Route path="categories" element={<Categories />}>
-              <Route path=":id" />
-            </Route> */}
+        
           </Route>
           <Route path="categories" element={<HomeMain />}>
             <Route path=":id" element={<Categories />}></Route>
@@ -168,7 +144,107 @@ root.render(
             ></Route>
           </Route>
         </Routes>
-      </HistoryRouter>
+      </BrowserRouter>
+
+
+      
+      {/* <HistoryRouter history={history}>
+        <Routes>
+          <Route path="" element={<HomeTeamplate />}>
+            <Route path="home" element={<Home />}>
+              <Route path="*" element={<Page404 />}></Route>
+            </Route>
+         
+          </Route>
+          <Route path="detail" element={<HomeMain />}>
+            <Route path=":keysearch" element={<Detail />}></Route>
+           
+          </Route>
+          <Route path="categories" element={<HomeMain />}>
+            <Route path=":id" element={<Categories />}></Route>
+          </Route>
+
+          <Route path="jobdetail" element={<HomeMain />}>
+            <Route path=":jobID" element={<JobDetail />}></Route>
+          </Route>
+          <Route path="login" element={<Login></Login>}></Route>
+          <Route path="signup" element={<Signup></Signup>}></Route>
+        </Routes>
+        <Routes>
+          <Route
+            path="/admin"
+            element={<ResponsiveItem Component={AdminTemplate} />}
+          >
+            <Route
+              index
+              element={<ResponsiveItem Component={User}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/user"
+              element={<ResponsiveItem Component={User}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/service"
+              element={<ResponsiveItem Component={Service}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/work"
+              element={<ResponsiveItem Component={Work}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/typeWork"
+              element={<ResponsiveItem Component={TypeWork}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/user/adduser"
+              element={<ResponsiveItem Component={AddUser}></ResponsiveItem>}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/admin/service/addservice"
+              element={<ResponsiveItem Component={AddService}></ResponsiveItem>}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/admin/work/addwork"
+              element={<ResponsiveItem Component={AddWork}></ResponsiveItem>}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/admin/typeWork/addtypeWork"
+              element={
+                <ResponsiveItem Component={AddTypeWork}></ResponsiveItem>
+              }
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/admin/user/edit/:id"
+              element={<ResponsiveItem Component={UpdateUser}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/service/edit/:id"
+              element={
+                <ResponsiveItem Component={UpdateSerivce}></ResponsiveItem>
+              }
+            ></Route>
+            <Route
+              path="/admin/work/edit/:id"
+              element={<ResponsiveItem Component={UpdateWork}></ResponsiveItem>}
+            ></Route>
+            <Route
+              path="/admin/typework/edit/:id"
+              element={
+                <ResponsiveItem Component={UpdateTypeWork}></ResponsiveItem>
+              }
+            ></Route>
+          </Route>
+        </Routes>
+      </HistoryRouter> */}
+
     </Provider>
   </>
 );
