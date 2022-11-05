@@ -72,7 +72,7 @@ root.render(
           <Route path="signup" element={<Signup></Signup>}></Route>
         </Routes>
         <Routes>
-          <Route
+          <Route 
             path="/admin"
             element={<ResponsiveItem Component={AdminTemplate} />}
           >
