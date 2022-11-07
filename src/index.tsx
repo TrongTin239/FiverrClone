@@ -21,7 +21,7 @@ import "./assets/scss/style.scss";
 import Categories from "./pages/Categories/Categories";
 import JobFromDetail from "./templates/HomeTemplate/JobFromDetail";
 import JobDetail from "./pages/JobDetail/JobDetail";
-import Demo from "./pages/Demo/Demo";
+import Demo from "./pages/Demo/demo";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import Page404 from "./pages/Page404/Page404";
@@ -40,8 +40,8 @@ import UpdateSerivce from "./pages/Admin/Service/UpdateSerivce";
 import UpdateTypeWork from "./pages/Admin/TypeWork.tsx/UpdateTypeWork";
 import UpdateWork from "./pages/Admin/Work/UpdateWork";
 import { createBrowserHistory } from "@remix-run/router";
-
-
+import Profile from "./pages/Profile/Profile";
+import UpdateProfile from './pages/Profile/UpdateProfile'
 
 export const history = createBrowserHistory({ window });
 const root = ReactDOM.createRoot(
@@ -69,6 +69,8 @@ root.render(
           <Route path="jobdetail" element={<HomeMain />}>
             <Route path=":jobID" element={<JobDetail />}></Route>
           </Route>
+          <Route path="profile" element={<Profile></Profile>}></Route>
+          <Route path="updateprofile/edit/:id" element={<UpdateProfile></UpdateProfile>}></Route>
         </Routes>
       </BrowserRouter>
       <HistoryRouter history={history}>

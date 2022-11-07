@@ -49,6 +49,7 @@ export const config = {
   },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
+  USER_ID: "userId"
 };
 export const {
   setCookie,
@@ -61,6 +62,7 @@ export const {
   eraseStore,
   ACCESS_TOKEN,
   USER_LOGIN,
+  USER_ID
 } = config;
 
 /**

@@ -117,7 +117,7 @@ export const getServiceApi = () => {
   export const searcServiceApi = (Keywork: any) => {
     return async (dispatch: AppDispatch) => {
       try {
-        const result = await http.get('/thue-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=5');
+        const result = await http.get('/thue-cong-viec/?pageIndex=' + `${Keywork}` + '&pageSize=5');
         let seach:Service[]=result.data.content;
         // console.log(seach)
         const action=searchServiceAction(seach)
