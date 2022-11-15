@@ -53,7 +53,7 @@ export default function Header({}: Props) {
         <NavLink
           className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
           to={`/login`}
-          target={"_parent"}
+          
         >
           {t("signin")}
         </NavLink>
@@ -62,7 +62,7 @@ export default function Header({}: Props) {
     return  <NavLink
         className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
         to={`/`}
-        target={"_parent"}
+        
         style={{backgroundColor:"transparent"}}
       >
         Hello, {userLogin.name}
@@ -74,7 +74,7 @@ export default function Header({}: Props) {
       return (
         <NavLink
           to={`/signup`}
-          target={"_parent"}
+          
      
         >
           <Button variant="outline-success"> {t("join")} </Button>
@@ -85,7 +85,7 @@ export default function Header({}: Props) {
       <NavLink
         className="nav-link"
         to="/"
-        target={"_parent"}
+        
         onClick={() => {
           eraseStore();
           eraseCookie(ACCESS_TOKEN);
@@ -268,7 +268,7 @@ export default function Header({}: Props) {
                     navbar ? " signIn linkColor" : "signIn disactiveColor"
                   }
                   to={`/login`}
-                  target={"_parent"}
+                  
                 >
                   
                   {t('signin')}
@@ -277,7 +277,7 @@ export default function Header({}: Props) {
               </li>
 
               <li className="lli">
-                {/* <NavLink to={`/signup`}  target={"_parent"}>
+                {/* <NavLink to={`/signup`}  >
                   <Button variant="outline-success" > {t('join')} </Button>
                 </NavLink> */}
                 {renderRegisterNavItem()}
