@@ -69,7 +69,7 @@ export default function Header({}: Props) {
         <NavLink
           className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
           to={`/login`}
-          target={"_parent"}
+         
         >
           {t("signin")}
         </NavLink>
@@ -78,7 +78,7 @@ export default function Header({}: Props) {
     return  <NavLink
         className={navbar ? " signIn linkColor" : "signIn disactiveColor"}
         to={`/`}
-        target={"_parent"}
+       
         style={{backgroundColor:"transparent"}}
       >
         Hello, {userLogin.name}
@@ -90,7 +90,7 @@ export default function Header({}: Props) {
       return (
         <NavLink
           to={`/signup`}
-          target={"_parent"}
+         
      
         >
           <Button variant="outline-success"> {t("join")} </Button>
